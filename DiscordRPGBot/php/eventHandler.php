@@ -7,7 +7,7 @@ class EventHandler
     {
         $this->eventLoop = $eventLoop;
 
-        $client->on('message', function (\CharlotteDunois\Yasmin\Models\Message $message) 
+        $yasmin->on('message', function (\CharlotteDunois\Yasmin\Models\Message $message) 
         {$this->Event('message', $message);});
 
         $this->Listen();
