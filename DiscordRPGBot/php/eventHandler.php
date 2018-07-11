@@ -16,7 +16,7 @@ class EventHandler
     public function Event($type = null, $data = null)
     {
         $result = null;
-        switch($event)
+        switch($type)
         {
             case 'message':
                 $result =  new MessageEvent($data);
