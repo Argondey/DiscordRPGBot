@@ -33,6 +33,10 @@ class MessageEvent
                         Logger::Log('New prefix was more than 1 character! Only 1 character prefixes are allowed.');
                     }
                     break;
+                case 'giveloot':
+                    $loot = new Loot();
+                    $item = $loot->GetLoot();
+                    return $item->Describe();
                 default:
                     Logger::Log('Message event resovled as Confusion');
                     return new Confusion();
