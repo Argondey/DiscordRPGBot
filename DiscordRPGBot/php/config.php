@@ -11,7 +11,7 @@ class Config
     public function __construct()
     {
         //require composer autoloader
-        require(__DIR__.'/vendor/autoload.php');
+        require(__DIR__.'../../vendor/autoload.php');
 
         //create reactphp eventloop
         $this->eventLoop = \React\EventLoop\Factory::create();
