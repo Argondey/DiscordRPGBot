@@ -8,7 +8,7 @@ class Logger
         array_push(self::$log, $message);
         if(Config::$logLevel >= $levelRequirement)
         {
-            echo $message . "\r\n";
+            echo $message . PHP_EOL;
         }
     }
 }

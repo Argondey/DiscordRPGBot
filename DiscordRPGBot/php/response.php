@@ -11,16 +11,15 @@ class Response
         {
             case 'override' :
                 $this->message = $data;
-            default         :
+                break;
             case 'random'   :
-                $this->Random();
+            default         :
+                $this->message = $this->Random();
                 break;
         }
     }
 
     public function Random()
-    {
-        $this->message = $this::$responseOptions[array_rand($this::$responses, 1)];
-    }
+    {return $this::$responseOptions[array_rand($this::$responseOptions, 1)];}
 }
 ?>

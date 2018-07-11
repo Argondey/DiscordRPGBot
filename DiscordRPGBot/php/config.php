@@ -6,7 +6,7 @@ class Config
     public static $yasmin = null;
     public static $eventLoop = null;
 
-    public static $logLevel = 2;
+    public static $logLevel = 1;
 
     public function __construct()
     {
@@ -21,7 +21,7 @@ class Config
         $this::$yasmin->login(getenv('DISCORD_TOKEN'));
         $this::$yasmin->on('ready', function ()
         {
-            echo 'Successfully logged in!'.PHP_EOL;
+            echo 'Successfully logged in!' . PHP_EOL;
         });
     }
 }
