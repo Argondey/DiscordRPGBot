@@ -1,0 +1,8 @@
+version: 0.0
+os: linux
+files:
+    - source: /DiscordRPGBot/
+      destination: /var/www/html/
+hooks:
+    BeforeInstall:
+      - location: /deletePrevDeploy.bash
