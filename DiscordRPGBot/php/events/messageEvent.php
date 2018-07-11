@@ -15,7 +15,7 @@ class MessageEvent
                     break;
                 case'changeprefix':
                     Logger::Log('Message event resovled as ChangePrefix');
-                    $len = strlen($content[1] == 1);
+                    $len = strlen($content[1]);
                     if($len == 1)
                     {
                         Config::$commandPrefix = $content[1];
