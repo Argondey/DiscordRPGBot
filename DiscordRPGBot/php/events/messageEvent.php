@@ -10,8 +10,11 @@ class MessageEvent
             switch($content[0])
             {
                 case'Hello':
+                    Logger::Log('Message event resovled as Greeting');
                     return new Greeting();
+                    break;
                 case'ChangePrefix':
+                    Logger::Log('Message event resovled as ChangePrefix');
                     $len = strlen($content[1] == 1);
                     if($len == 1)
                     {
@@ -29,9 +32,16 @@ class MessageEvent
                         $message->channel->send('New prefix was more than 1 character! Only 1 character prefixes are allowed.');
                         Logger::Log('New prefix was more than 1 character! Only 1 character prefixes are allowed.');
                     }
+                    break;
                 default:
+                    Logger::Log('Message event resovled as Confusion');
                     return new Confusion();
+                    break;
             }
+        }
+        else
+        {
+            Logger::Log('Message event did not contain command symbol', 2);
         }
     }
 }

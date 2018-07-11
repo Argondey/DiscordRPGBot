@@ -6,7 +6,7 @@ class Config
     public static $yasmin = null;
     public static $eventLoop = null;
 
-    public static $logLevel = 1;
+    public static $logLevel = 2;
 
     public function __construct()
     {
