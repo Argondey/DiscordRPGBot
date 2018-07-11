@@ -32,11 +32,6 @@ class EventHandler
             $data->channel->send($result->message);
             Logger::Log('Attempted to send a response.');
         }
-        else
-        {
-            $data->channel->send('Event result was not a response.');
-            Logger::Log('Attempted to send a failure message.');
-        }
     }
 
     public function Listen()
