@@ -3,10 +3,7 @@ class Config
 {
     public static $commandPrefix = '$';
     public static $yasmin = null;
-
-    private $eventLoop = null;
-    public function GetEventLoop()
-    {return $this->eventLoop;}
+    public static $eventLoop = null;
 
     public function __construct()
     {
@@ -14,7 +11,7 @@ class Config
         require(__DIR__.'/../../composer/vendor/autoload.php');
 
         //create reactphp eventloop
-        $this->eventLoop = \React\EventLoop\Factory::create();
+        $this::$eventLoop = \React\EventLoop\Factory::create();
 
         // Create the client
         $this::$yasmin = new \CharlotteDunois\Yasmin\Client([], $this->eventLoop);
