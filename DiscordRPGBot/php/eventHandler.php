@@ -21,8 +21,10 @@ class EventHandler
         {
             case 'message':
                 $result = MessageEvent::HandleEvent($data);
+                break;
             default:
                 return null;
+                break;
         }
 
         if(is_a($result, 'Response'))
