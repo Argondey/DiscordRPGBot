@@ -14,9 +14,9 @@ class Config
         $this::$eventLoop = \React\EventLoop\Factory::create();
 
         // Create the client
-        $this::$yasmin = new \CharlotteDunois\Yasmin\Client([], $this->eventLoop);
+        $this::$yasmin = new \CharlotteDunois\Yasmin\Client([], $this::$eventLoop);
         $this::$yasmin->login(getenv('DISCORD_TOKEN'));
-        $this::$yasmin->on('ready', function () use ($yasmin)
+        $this::$yasmin->on('ready', function ()
         {
             echo 'Successfully logged in!'.PHP_EOL;
         });
