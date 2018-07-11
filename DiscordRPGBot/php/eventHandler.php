@@ -22,7 +22,7 @@ class EventHandler
             case 'message':
                 $result = new MessageEvent($data);
             default:
-                $result = new Confusion();
+                return null;
         }
 
         if(is_a($result, 'Response'))

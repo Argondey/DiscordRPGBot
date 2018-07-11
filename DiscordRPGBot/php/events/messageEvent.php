@@ -7,13 +7,13 @@ class MessageEvent
         if(substr($message->content, 0, 1) == Config::$commandPrefix)
         {
             $content = explode(' ', substr($message->content, 1));
-            switch($content[0])
+            switch(strtolower($content[0]))
             {
-                case'Hello':
+                case'hello':
                     Logger::Log('Message event resovled as Greeting');
                     return new Greeting();
                     break;
-                case'ChangePrefix':
+                case'changeprefix':
                     Logger::Log('Message event resovled as ChangePrefix');
                     $len = strlen($content[1] == 1);
                     if($len == 1)
