@@ -1,6 +1,7 @@
 <?php
 
 require_once 'config.php';
+require_once 'logger.php';
 require_once 'events/messageEvent.php';
 require_once 'eventHandler.php';
 require_once 'response.php';

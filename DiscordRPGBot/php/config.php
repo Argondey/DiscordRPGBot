@@ -2,8 +2,11 @@
 class Config
 {
     public static $commandPrefix = '$';
+    
     public static $yasmin = null;
     public static $eventLoop = null;
+
+    public static $logLevel = 1;
 
     public function __construct()
     {
