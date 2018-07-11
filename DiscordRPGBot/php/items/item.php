@@ -9,7 +9,7 @@ class Item
 
     public function Describe()
     {
-        return new Response('override', 'A' . $this->name . ' of ' . $this->quality . ' quality. ' . $this->description);
+        return new Response('override', 'A ' . $this->name . ' of ' . $this->quality . ' quality. ' . $this->description);
     }
 }
 ?>
