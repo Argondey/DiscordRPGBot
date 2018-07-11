@@ -1,7 +1,7 @@
 <?php
 class MessageEvent
 {
-    public function __construct($message)
+    public static function HandleEvent($message)
     {
         Logger::Log('A message event was constructed.');
         if(substr($message->content, 0, 1) == Config::$commandPrefix)

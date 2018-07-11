@@ -20,7 +20,7 @@ class EventHandler
         switch($type)
         {
             case 'message':
-                $result = new MessageEvent($data);
+                $result = MessageEvent::HandleEvent($data);
             default:
                 return null;
         }
