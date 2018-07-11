@@ -15,6 +15,7 @@ class EventHandler
 
     public function Event($type = null, $data = null)
     {
+        echo 'Event handler was called.';
         $result = null;
         switch($type)
         {

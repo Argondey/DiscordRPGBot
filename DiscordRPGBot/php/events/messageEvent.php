@@ -3,6 +3,7 @@ class MessageEvent
 {
     public function __construct($message)
     {
+        echo 'A message event was constructed.';
         if(substr($message->content, 0, 1) == Config::$commandPrefix)
         {
             $content = explode(' ', substr($message->content, 1));
