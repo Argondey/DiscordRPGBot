@@ -19,14 +19,18 @@ class EventHandler
         switch($type)
         {
             case 'message':
-                $result =  new MessageEvent($data);
+                $result = new MessageEvent($data);
             default:
-                $result =  new Confusion();
+                $result = new Confusion();
         }
 
         if(is_a($result, 'Response'))
         {
             $message->channel->send($result->message);
+        }
+        else
+        {
+            $message->channel->send('Event result was not a response.');
         }
     }
 
