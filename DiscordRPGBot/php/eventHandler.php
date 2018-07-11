@@ -27,10 +27,12 @@ class EventHandler
         if(is_a($result, 'Response'))
         {
             $data->channel->send($result->message);
+            echo 'Attempted to send a response.';
         }
         else
         {
             $data->channel->send('Event result was not a response.');
+            echo 'Attempted to send a failure message.';
         }
     }
 
