@@ -26,11 +26,11 @@ class EventHandler
 
         if(is_a($result, 'Response'))
         {
-            $message->channel->send($result->message);
+            $data->channel->send($result->message);
         }
         else
         {
-            $message->channel->send('Event result was not a response.');
+            $data->channel->send('Event result was not a response.');
         }
     }
 
