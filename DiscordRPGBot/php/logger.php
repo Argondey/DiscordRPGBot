@@ -5,7 +5,7 @@ class Logger
 
     public static function Log($message)
     {
-        array_push($log, $message);
+        array_push(self::$log, $message);
         if(Config::$logLevel > 0)
         {
             echo $message;
