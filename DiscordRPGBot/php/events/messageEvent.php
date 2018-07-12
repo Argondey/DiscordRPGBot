@@ -13,6 +13,10 @@ class MessageEvent
                     Logger::Log('Message event resovled as Greeting');
                     return new Greeting();
                     break;
+                case 'testdatabase':
+                    $items = Database::Query('SELECT * FROM RPGBot.items;');
+                    $message->channel->send($items[0]['name']);
+                    break;                
                 case'changeprefix':
                     Logger::Log('Message event resovled as ChangePrefix');
                     $len = strlen($content[1]);
