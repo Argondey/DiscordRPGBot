@@ -2,6 +2,7 @@
 
 require_once 'config.php';
 require_once 'logger.php';
+require_once 'database.php';
 require_once 'items/item.php';
 require_once 'items/loot.php';
 require_once 'items/weapons/hammer.php';

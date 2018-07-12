@@ -11,5 +11,10 @@ class Item
     {
         return new Response('override', 'A ' . $this->name . ' of ' . $this->quality . ' quality. ' . $this->description);
     }
+
+    public function GetAll()
+    {
+        
+    }
 }
 ?>
