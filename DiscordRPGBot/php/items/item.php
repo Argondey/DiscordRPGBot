@@ -48,7 +48,9 @@ class Item
     {
         $items = Database::Query('SELECT * FROM RPGBot.items;');
         for($i = 0; $i < count($items); $i++)
-            {array_push(self::$allItems, new Item($item[$i]));}
+            {array_push(self::$allItems, new Item($items[$i]));}
+
+        Logger::Log(count($items) . ' items successfully loaded.');
     }
 }
 ?>
