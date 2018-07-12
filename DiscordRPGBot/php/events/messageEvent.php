@@ -4,10 +4,12 @@ class MessageEvent
     public static function HandleEvent(\CharlotteDunois\Yasmin\Models\Message $message)
     {
         $guild  = Guild::GetGuild($message->guild);
+        if($guild != null){Logger::Log('A guild was found.');}
+        
         $user   = self::IdentifyUser($message);
         if($user != null)
         {
-            Logger::Log('A message event was constructed.');
+            Logger::Log('A user was found.');
             if(substr($message->content, 0, 1) == $guild->settings['commandPrefix'])
             {
                 $content = explode(' ', substr($message->content, 1));
