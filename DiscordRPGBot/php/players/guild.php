@@ -32,7 +32,7 @@ class Guild
         else{return null;}
     }
 
-    public function GetPlayer(\CharlotteDunois\Yasmin\Models\User $user)
+    public function GetUser(\CharlotteDunois\Yasmin\Models\User $user)
     {
         if(!isset($this->users[$user->id]))
         {
