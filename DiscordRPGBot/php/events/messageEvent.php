@@ -3,7 +3,7 @@ class MessageEvent
 {
     public static function HandleEvent(\CharlotteDunois\Yasmin\Models\Message $message)
     {
-        if(!$message->user->bot)
+        if(!$message->author->bot)
         {
             $guild = Guild::GetGuild($message->guild);
             if($guild != null){Logger::Log('A guild was found.');}
