@@ -11,7 +11,7 @@ class User
     public function __construct(\CharlotteDunois\Yasmin\Models\User $user)
     {
         $this->user = $user;
-        $this->name = $user->name;
+        $this->name = $user->username;
         $this->id   = $user->id;
     }
 
