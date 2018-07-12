@@ -22,12 +22,9 @@ class Guild
         if($guild != null)
         {
             if(!isset(self::$guilds[$guild->id]))
-            {
-                $newGuild = new Guild($guild);
-                self::$guilds[$guild->id] = $newGuild;
-                return $newGuild;
-            }
-            else{return self::$guilds[$guild->id];}
+                {self::$guilds[$guild->id] = new Guild($guild);}
+
+            return self::$guilds[$guild->id];
         }
         else{return null;}
     }
@@ -35,12 +32,9 @@ class Guild
     public function GetUser(\CharlotteDunois\Yasmin\Models\User $user)
     {
         if(!isset($this->users[$user->id]))
-        {
-            $newUser = new User($user);
-            $this->users[$user->id] = $newUser;
-            return $newUser;
-        }
-        else{return $this->users[$user->id];}
+            {$this->users[$user->id] = new User($user);}
+
+        return $this->users[$user->id];
     }
 }
 ?>
