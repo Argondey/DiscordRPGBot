@@ -18,9 +18,9 @@ require_once 'responses/confusion.php';
 
 $config = new Config();
 
+
 $items = Database::Query('SELECT * FROM RPGBot.items;');
-echo $items[0]['name'];
-echo $items[1]['name'];
+var_dump($items);
 
 $eventHandler = new EventHandler($config::$eventLoop, $config::$yasmin);
 
