@@ -14,7 +14,9 @@ class MessageEvent
                     return new Greeting();
                     break;
                 case'testdatabase':
-                    $message->channel->send(var_dump(Database::Query('SELECT * FROM RPGBot.items')));
+                    $items = Database::Query('SELECT * FROM RPGBot.items');
+                    $message->channel->send($items[0]['name']);
+                    $message->channel->send($items[1]['name']);
                     break;
                 case'changeprefix':
                     Logger::Log('Message event resovled as ChangePrefix');
