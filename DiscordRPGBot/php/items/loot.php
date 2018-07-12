@@ -10,7 +10,7 @@ class Loot
 
     public function CreateLoot()
     {
-        $this->lootTable = [new Hammer(), new Pistol(), new Rapier(), new Shield(), new Sword()];
+        $this->lootTable = Item::$allItems;
     }
 
     public function GetLoot()

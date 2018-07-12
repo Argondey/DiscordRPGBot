@@ -3,22 +3,24 @@
 require_once 'config.php';
 require_once 'logger.php';
 require_once 'database.php';
+
 require_once 'items/item.php';
+require_once 'items/weapon.php';
 require_once 'items/loot.php';
-require_once 'items/weapons/hammer.php';
-require_once 'items/weapons/pistol.php';
-require_once 'items/weapons/rapier.php';
-require_once 'items/weapons/shield.php';
-require_once 'items/weapons/sword.php';
+
+require_once 'players/guild.php';
+require_once 'players/user.php';
+
 require_once 'events/messageEvent.php';
-require_once 'eventHandler.php';
-require_once 'response.php';
+require_once 'events/eventHandler.php';
+
+require_once 'responses/response.php';
 require_once 'responses/greeting.php';
 require_once 'responses/confusion.php';
 
 $config = new Config();
 
-$eventHandler = new EventHandler($config::$eventLoop, $config::$yasmin);
+Item::LoadItems();
 
-$eventHandler->Event();
+$eventHandler = new EventHandler($config::$eventLoop, $config::$yasmin);
 ?>

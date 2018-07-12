@@ -1,8 +1,6 @@
 <?php
 class Config
 {
-    public static $commandPrefix = '$';
-    
     public static $yasmin = null;
     public static $eventLoop = null;
 
