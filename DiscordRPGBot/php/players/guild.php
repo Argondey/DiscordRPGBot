@@ -17,15 +17,19 @@ class Guild
         $this->id       = $guild->id;
     }
 
-    public static function GetGuild(\CharlotteDunois\Yasmin\Models\Guild $guild)
+    public static function GetGuild(\CharlotteDunois\Yasmin\Models\Guild $guild = null)
     {
-        if(!isset(self::$guilds[$guild->id]))
+        if($guild != null)
         {
-            $newGuild = new Guild($guild);
-            self::$guilds[$guild->id] = $newGuild;
-            return $newGuild;
+            if(!isset(self::$guilds[$guild->id]))
+            {
+                $newGuild = new Guild($guild);
+                self::$guilds[$guild->id] = $newGuild;
+                return $newGuild;
+            }
+            else{return self::$guilds[$guild->id];}
         }
-        else{return self::$guilds[$guild->id];}
+        else{return null;}
     }
 
     public function GetPlayer(\CharlotteDunois\Yasmin\Models\User $user)
