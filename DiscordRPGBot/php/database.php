@@ -18,7 +18,7 @@ class Database
             . ";port="          . self::$dbport
             . ";dbname="        . self::$dbname
             . ";charset="       . self::$charset;
-        self::$pdo = new PDO($dsn, Config::$database['username'], Config::$database['password']);
+        self::$pdo = new PDO($dsn, Config::$databaseUsername, Config::$databasePassword);
         self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         return self::$pdo;
     }
