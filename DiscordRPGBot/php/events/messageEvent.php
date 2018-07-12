@@ -5,8 +5,8 @@ class MessageEvent
     {
         $guild  = Guild::GetGuild($message->guild);
         if($guild != null){Logger::Log('A guild was found.');}
-        
-        $user   = self::IdentifyUser($message);
+
+        $user = self::IdentifyUser($message);
         if($user != null)
         {
             Logger::Log('A user was found.');
@@ -67,7 +67,7 @@ class MessageEvent
         else
         {
             $guild = Guild::GetGuild($message->guild);
-            return $guild->GetUser($message->user);
+            return $guild->GetUser($message->author);
         }
     }
 }

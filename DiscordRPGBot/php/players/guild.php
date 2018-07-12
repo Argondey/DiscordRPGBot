@@ -3,11 +3,11 @@ class Guild
 {
     public static $guilds = [];
 
-    public $name    = '';
-    public $id      = null;
-    public $guild   = null;
+    public $name        = '';
+    public $id          = null;
+    public $guild       = null;
 
-    public $players     = [];
+    public $users       = [];
     public $settings    = ['commandPrefix' => '$'];
 
     public function __construct(\CharlotteDunois\Yasmin\Models\Guild $guild)
@@ -28,15 +28,15 @@ class Guild
         else{return self::$guilds[$guild->id];}
     }
 
-    public function GetPlayer(\CharlotteDunois\Yasmin\Models\User $player)
+    public function GetPlayer(\CharlotteDunois\Yasmin\Models\User $user)
     {
-        if(!isset($this->players[$player->id]))
+        if(!isset($this->users[$user->id]))
         {
-            $newPlayer = new Player($player);
-            $this->players[$player->id] = $newPlayer;
-            return $newPlayer;
+            $newUser = new User($user);
+            $this->users[$user->id] = $newUser;
+            return $newUser;
         }
-        else{return $this->players[$player->id];}
+        else{return $this->users[$user->id];}
     }
 }
 ?>
