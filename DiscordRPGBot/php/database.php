@@ -40,7 +40,7 @@ class Database
     {
         $preparedStatement = self::PDO()->prepare($query);
         $preparedStatement->execute($params);
-        $result = $preparedStatement->fetch($pdoFetchType);
+        $result = $preparedStatement->fetchall($pdoFetchType);
         return $result;
     }
 }
