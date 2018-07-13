@@ -43,8 +43,15 @@ class Inventory
     {
         if(count($this->bag) > 0)
         {
-            $itemNames = array_column($this->bag, 'name');
-            return new Response('override', $this->user->name . ' has: ' . implode(', ', $itemNames));
+            $bagKeys = array_keys($this->bag);
+            $items = [];
+
+            for($i = 0; $i < count($bagKeys); $i++)
+            {
+                $item = $this->bag[$bagKeys[$i]];
+                array_push($items, $item->name . ' x' . $item->quantity);
+            }
+            return new Response('override', $this->user->name . ' has: ' . implode(', ', $items));
         }
         else{return new Response('override', $this->user->name . ' has no items');}
     }
