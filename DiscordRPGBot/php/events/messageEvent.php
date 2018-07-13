@@ -14,8 +14,8 @@ class MessageEvent
                 Logger::Log('A user was found.');
                 if(substr($message->content, 0, 1) == $guild->settings['commandPrefix'])
                 {
-                    $content = explode(' ', substr($message->content, 1));
-                    switch(strtolower($content[0]))
+                    $content = explode(' ', substr(strtolower($message->content), 1));
+                    switch($content[0])
                     {
                         case'hello':
                             Logger::Log('Message event resovled as Greeting');
@@ -44,7 +44,7 @@ class MessageEvent
                         case 'item':
                             if(count($content > 1))
                             {
-                                switch(strtolower($content[1]))
+                                switch($content[1])
                                 {
                                     case 'discard':
                                         if(count($content > 2))
@@ -55,8 +55,8 @@ class MessageEvent
 
                                             $numDiscarded = $user->inventory->DiscardItem($content[2], $numToDiscard);
                                             if($numDiscarded !== false)
-                                                {return new Response('override', $user->name . ' has discarded ' . $content[2] . 'X' . $numDiscarded . '.');}
-                                            else{return new Response('override', $user->name . ' did not have a(n) ' . $content[2] . ' to discard.');}
+                                                {return new Response('override', $user->name . ' has discarded '        . $content[2] . ' X' . $numDiscarded . '.');}
+                                            else{return new Response('override', $user->name . ' did not have a(n) '    . $content[2] . ' to discard.');}
                                         }
                                         else{return new Response('override', $user->name . '- You did not specify which item to discard.');}
                                         break;
