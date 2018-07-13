@@ -79,7 +79,7 @@ class MessageEvent
                             else{return $result;}
                             break;
                         case 'myinventory':
-                            return $user->ListInventory();
+                            return $user->inventory->ListItems();
                             break;
                         default:
                             Logger::Log('Message event resovled as Confusion');

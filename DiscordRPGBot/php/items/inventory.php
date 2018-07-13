@@ -36,7 +36,7 @@ class Inventory
 
     }
 
-    public function ListInventory()
+    public function ListItems()
     {
         $itemNames = array_column($this->bag, 'name');
         return new Response('override', implode(', ', $itemNames));

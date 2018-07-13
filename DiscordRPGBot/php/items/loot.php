@@ -20,7 +20,7 @@ class Loot
         if($timeSinceLastLoot > $lootCooldown)
         {
             $item = $this->RandomLoot();
-            $user->AddItem($item);
+            $user->inventory->AddItem($item);
             return $item;
         }
         else return new Response('override', 'You cannot recieve loot yet. You can recieve loot again in ' . ($lootCooldown - $timeSinceLastLoot) . ' seconds.');
