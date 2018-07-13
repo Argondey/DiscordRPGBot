@@ -1,24 +1,16 @@
 <?php
 class Database
 {
-    //------------------------------------------------------------------------------------//
-    //Database Connection Credentials
-    public static $dbhost   = "rpgbot.ckpitfzeowvu.us-west-1.rds.amazonaws.com:3306";
-    public static $dbname   = "RPGBot";
-    public static $dbport   = "3306";
-    public static $charset  = "utf8";    
-    //------------------------------------------------------------------------------------//
-
     protected static $pdo  = null;
 
     //this function returns a connection to the database
     protected static function GetConnection()
     {
-        $dsn = "mysql:host="    . self::$dbhost
-            . ";port="          . self::$dbport
-            . ";dbname="        . self::$dbname
-            . ";charset="       . self::$charset;
-        self::$pdo = new PDO($dsn, Config::$databaseUsername, Config::$databasePassword);
+        $dsn = "mysql:host="    . Config::$dbhost
+            . ";port="          . Config::$dbport
+            . ";dbname="        . Config::$dbname
+            . ";charset="       . Config::$charset;
+        self::$pdo = new PDO($dsn, Config::$dbUsername, Config::$dbPassword);
         self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         return self::$pdo;
     }

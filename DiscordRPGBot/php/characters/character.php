@@ -10,7 +10,9 @@ class character
     public $currentHealth   = 1;
     public $maxHealth       = 1;
 
-    public $gearSlots = ['head', 'eyes', 'shoulders', 'torso', 'arms', 'legs', 'feet', 'finger'];
-    public $gear = [];
+    public function __construct()
+    {
+
+    }
 }
 ?>

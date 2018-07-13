@@ -41,11 +41,42 @@ class MessageEvent
                                 Logger::Log('New prefix was more than 1 character! Only 1 character prefixes are allowed.');
                             }
                             break;
-                        case 'giveloot':
+                        case 'item':
+                            if(count($content > 1))
+                            {
+                                switch(strtolower($content[1]))
+                                {
+                                    case 'Discard':
+                                        if(count($content > 1))
+                                        {
+                                            if($user->inventory->DiscardItem($content[2]))
+                                                {return new Response('override', $user->name . ' has discarded ' . $content[2] . '.');}
+                                            else{return new Response('override', $user->name . ' did not have a(n) ' . $content[2] . ' to discard.');}
+                                        }
+                                        else
+                                        {
+                                            return new Response('override', $user->name . '- You did not specify which item to discard.');
+                                        }
+                                        break;
+                                    case 'Info':
+                                        if(count($content > 1))
+                                        {
+                                            $item = Item::Find();
+                                            return new Response('override', $user->name . ' has discarded ' . $content[2] . '.');
+                                        }
+                                        else{return new Response('override', $user->name . '- You did not specify which item to get info on.');}
+                                        break;
+                                    case 'Use':
+                                        break;
+                                }  
+                            }
+                            break;
+                        case 'loot':
                             $loot = new Loot();
-                            $item = $loot->GetLoot();
-                            $user->AddItem($item);
-                            return $item->Describe();
+                            $result = $loot->GetLoot($user);
+                            if(is_a($result, 'Item'))
+                                {return $result->Describe();}
+                            else{return $result;}
                             break;
                         case 'myinventory':
                             return $user->ListInventory();

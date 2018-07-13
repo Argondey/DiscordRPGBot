@@ -3,27 +3,23 @@ class User
 {
     public $user = null;
 
-    public $name    = '';
-    public $id      = null;
+    public $name        = '';
+    public $id          = null;
+    public $guild       = null;
 
-    public $inventory = [];
+    public $inventory   = null;
+    public $currency    = 0;
+
+    public $lastLoot    = 0;
 
     public function __construct(\CharlotteDunois\Yasmin\Models\User $user)
     {
-        $this->user = $user;
-        $this->name = $user->username;
-        $this->id   = $user->id;
-    }
+        $this->user         = $user;
+        $this->name         = $user->username;
+        $this->guild        = $user->guild;
+        $this->id           = $user->id;
 
-    public function AddItem(Item $item)
-    {
-        array_push($this->inventory, $item);
-    }
-
-    public function ListInventory()
-    {
-        $itemNames = array_column($this->inventory, 'name');
-        return new Response('override', implode(', ', $itemNames));
+        $this->inventory    = new Inventory();
     }
 }
 ?>

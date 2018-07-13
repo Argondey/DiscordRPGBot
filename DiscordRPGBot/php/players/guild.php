@@ -3,12 +3,16 @@ class Guild
 {
     public static $guilds = [];
 
-    public $name        = '';
-    public $id          = null;
-    public $guild       = null;
+    public $name            = '';
+    public $id              = null;
+    public $guild           = null;
 
-    public $users       = [];
-    public $settings    = ['commandPrefix' => '$'];
+    public $users           = [];
+    public $settings        = 
+        //prefix to be used on every bot command
+        ['commandPrefix'    => '$'
+        //minutes between loot calls
+        ,'lootCooldown'     => 1];
 
     public function __construct(\CharlotteDunois\Yasmin\Models\Guild $guild)
     {

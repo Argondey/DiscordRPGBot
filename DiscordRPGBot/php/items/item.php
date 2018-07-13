@@ -1,56 +1,60 @@
 <?php
-class Item
+class Item extends ItemBase
 {
-    public static $allItems = [];
+    public $id              = 0;
+    public $name            = '';
+    public $type            = 0;
+    public $quality         = 0;
+    public $description     = '';
+    public $maxUses         = -1;
+    public $activeEffects   = [];
+    public $passiveEffects  = [];
+    public $wearableSlots   = [];
 
-    public static $qualityMap = 
-        [0  => 'laughable'
-        ,1  => 'pathetic'
-        ,2  => 'miserable'
-        ,3  => 'meager'
-        ,4  => 'shabby'
-        ,5  => 'poor'
-        ,6  => 'common'
-        ,7  => 'decent'
-        ,8  => 'fine'
-        ,9  => 'rare'
-        ,10 => 'unique'
-        ,11 => 'legendary'
-        ,12 => 'mythic'
-        ,13 => 'godly'
-        ,14 => 'lost'
-        ,15 => 'forbidden'];
-
-    public $name = '';
-
-    public $quality = null;
-
-    public $description = '';
+    public $uses            = 0;
+    public $quantity        = 1;
 
     public function __construct(array $args)
     {
-        if(isset($args['name']))
-            {$this->name        = $args['name'];}
+        $this->id               = $args['id'];
+        $this->name             = $args['name'];
+        $this->type             = $args['type'];
+        $this->quality          = $args['quality'];
+        $this->description      = $args['description'];
+        $this->maxUses          = $args['maxUses'];
+        $this->activeEffects    = $args['activeEffects'];
+        $this->passiveEffects   = $args['passiveEffects'];
+        $this->wearableSlots    = $args['wearableSlots'];
 
-        if(isset($args['quality']))
-            {$this->quality     = $args['quality'];}
-
-        if(isset($args['description']))
-            {$this->description = $args['description'];}
+        $this->uses             = $args['maxUses'];
     }
 
     public function Describe()
     {
-        return new Response('override', 'A ' . $this->name . ' of ' . self::$qualityMap[$this->quality] . ' quality. ' . $this->description);
+        return new Response('override', 'A(n) ' . $this->name . ' of ' . Item::$qualities[$this->quality] . ' quality. ' . $this->description);
     }
 
-    public static function LoadItems()
+    public function Info()
     {
-        $items = Database::Query('SELECT * FROM RPGBot.items;');
-        for($i = 0; $i < count($items); $i++)
-            {array_push(self::$allItems, new Item($items[$i]));}
+        $info = 
+            ['Name: '       . $this->name
+            ,'Type: '       . Item::$types[$this->type]
+            ,'Quality: '    . Item::$qualities[$this->quality]
+            ,'Uses: '       . $this->uses . '/' . $this->maxUses
+            ,'Slot: '       . $this->slot];
 
-        Logger::Log(count($items) . ' items successfully loaded.');
+        if(isset($this->activeEffects) && count($this->activeEffects) > 0)
+            {array_push($info, 'Active Effects: ' . implode(', ', $this->activeEffects));}
+
+        if(isset($this->passiveEffects) && count($this->passiveEffects) > 0)
+            {array_push($info, 'Passive Effects: ' . implode(', ', $this->passiveEffects));}
+
+        return new Response('override', implode('\r\n', $info));
+    }
+
+    public function Use($target)
+    {
+
     }
 }
 ?>

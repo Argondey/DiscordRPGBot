@@ -4,8 +4,9 @@ require_once 'config.php';
 require_once 'logger.php';
 require_once 'database.php';
 
+require_once 'items/itemBase.php';
 require_once 'items/item.php';
-require_once 'items/weapon.php';
+require_once 'items/inventory.php';
 require_once 'items/loot.php';
 
 require_once 'players/guild.php';
