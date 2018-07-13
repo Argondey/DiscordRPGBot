@@ -19,6 +19,7 @@ class Loot
         $lootCooldown = $user->guild->settings['lootCooldown'] * 60;
         if($timeSinceLastLoot > $lootCooldown)
         {
+            $user->lastLoot = time();
             $item = $this->RandomLoot();
             $user->inventory->AddItem($item);
             return $item;

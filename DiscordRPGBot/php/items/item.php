@@ -43,7 +43,11 @@ class Item extends ItemBase
             ,'Slot: '       . $this->slot];
 
         if($this->uses !== -1)
-        {array_push($info, 'Uses: ' . $this->uses . '/' . $this->maxUses);}
+        {
+            if($this->uses == $this->maxUses)
+                {array_push($info, 'Uses: ' . $this->maxUses);}
+            else{array_push($info, 'Uses: ' . $this->uses . '/' . $this->maxUses);}
+        }
 
         if(isset($this->activeEffects) && count($this->activeEffects) > 0)
             {array_push($info, 'Active Effects: ' . implode(', ', $this->activeEffects));}
