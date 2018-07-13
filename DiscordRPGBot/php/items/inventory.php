@@ -20,13 +20,13 @@ class Inventory
 
     public function DiscardItem(string $itemName, int $quantity = 1)
     {
-        if(isset($this->bag[$item->name]))
+        if(isset($this->bag[$itemName]))
         {
-            $numDiscarded = min($quantity, $this->bag[$item->name]->quantity);
+            $numDiscarded = min($quantity, $this->bag[$itemName]->quantity);
 
-            if($this->bag[$item->name]->quantity <= $quantity)
-                {$this->bag[$item->name] = null;}
-            else{$this->bag[$item->name]--;}
+            if($this->bag[$itemName]->quantity <= $quantity)
+                {$this->bag[$itemName] = null;}
+            else{$this->bag[$itemName]--;}
 
             return $numDiscarded;
         }

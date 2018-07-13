@@ -55,22 +55,14 @@ class MessageEvent
 
                                             $numDiscarded = $user->inventory->DiscardItem($content[2], $numToDiscard);
                                             if($numDiscarded !== false)
-                                            {
-                                                return new Response('override', $user->name . ' has discarded ' . $content[2] . 'X' . $numDiscarded . '.');
-                                            }
+                                                {return new Response('override', $user->name . ' has discarded ' . $content[2] . 'X' . $numDiscarded . '.');}
                                             else{return new Response('override', $user->name . ' did not have a(n) ' . $content[2] . ' to discard.');}
                                         }
-                                        else
-                                        {
-                                            return new Response('override', $user->name . '- You did not specify which item to discard.');
-                                        }
+                                        else{return new Response('override', $user->name . '- You did not specify which item to discard.');}
                                         break;
                                     case 'info':
                                         if(count($content > 1))
-                                        {
-                                            $item = Item::Find();
-                                            return new Response('override', $user->name . ' has discarded ' . $content[2] . '.');
-                                        }
+                                            {return Item::Find($content[2]);}
                                         else{return new Response('override', $user->name . '- You did not specify which item to get info on.');}
                                         break;
                                     case 'Use':
