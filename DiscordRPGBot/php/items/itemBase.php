@@ -49,11 +49,9 @@ abstract class ItemBase
 
     public static function Find(string $name)
     {
-        $names = array_column(self::$allItems, 'name');
-        $index = array_search($name, $names);
-        if($index === false)
-            {return false;}
-        else{return self::$allItems[$index];}
+        if(isset(self::$allItems[$name]))
+            {return self::$allItems[$name];}
+        else{return false;}
     }
 
     public static function LoadItems()
