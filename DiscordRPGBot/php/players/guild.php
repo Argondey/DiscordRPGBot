@@ -16,7 +16,7 @@ class Guild
 
     public function __construct(\CharlotteDunois\Yasmin\Models\Guild $guild)
     {
-        $this->guild    = $guild;
+        $this    = $guild;
         $this->name     = $guild->name;
         $this->id       = $guild->id;
     }

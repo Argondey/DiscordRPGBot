@@ -16,7 +16,7 @@ class User
     {
         $this->user         = $user;
         $this->name         = $user->username;
-        $this->guild        = $user->guild;
+        $this->guild        = $guild;
         $this->id           = $user->id;
 
         $this->inventory    = new Inventory();
