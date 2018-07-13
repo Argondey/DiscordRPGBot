@@ -7,8 +7,9 @@ class Inventory
 
     public $bag         = [];
 
-    public function __construct()
+    public function __construct(User $user)
     {
+        $this->user = $user;
     }
 
     public function AddItem(Item $item)

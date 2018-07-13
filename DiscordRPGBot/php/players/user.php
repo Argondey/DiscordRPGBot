@@ -19,7 +19,7 @@ class User
         $this->guild        = $guild;
         $this->id           = $user->id;
 
-        $this->inventory    = new Inventory();
+        $this->inventory    = new Inventory($this);
     }
 }
 ?>
