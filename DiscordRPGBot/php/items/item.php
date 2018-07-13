@@ -31,15 +31,15 @@ class Item extends ItemBase
 
     public function Describe()
     {
-        return new Response('override', 'A(n) ' . $this->name . ' of ' . Item::$qualities[$this->quality] . ' quality. ' . $this->description);
+        return new Response('override', 'A(n) ' . $this->name . ' of ' . $this->quality . ' quality. ' . $this->description);
     }
 
     public function Info()
     {
         $info = 
             ['Name: '       . $this->name
-            ,'Type: '       . Item::$types[$this->type]
-            ,'Quality: '    . Item::$qualities[$this->quality]
+            ,'Type: '       . $this->type
+            ,'Quality: '    . $this->quality
             ,'Uses: '       . $this->uses . '/' . $this->maxUses
             ,'Slot: '       . $this->slot];
 
