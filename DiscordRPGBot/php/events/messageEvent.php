@@ -61,8 +61,8 @@ class MessageEvent
                                         else{return new Response('override', $user->name . '- You did not specify which item to discard.');}
                                         break;
                                     case 'info':
-                                        if(count($content > 1))
-                                            {return Item::Find($content[2]);}
+                                        if(count($content) > 2)
+                                            {return Item::Find($content[2])->Info();}
                                         else{return new Response('override', $user->name . '- You did not specify which item to get info on.');}
                                         break;
                                     case 'Use':
