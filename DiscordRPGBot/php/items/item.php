@@ -9,7 +9,7 @@ class Item extends ItemBase
     public $maxUses         = -1;
     public $activeEffects   = [];
     public $passiveEffects  = [];
-    public $wearableSlots   = [];
+    public $slot            = [];
 
     public $uses            = 0;
     public $quantity        = 1;
@@ -24,7 +24,7 @@ class Item extends ItemBase
         $this->maxUses          = $args['maxUses'];
         $this->activeEffects    = $args['activeEffects'];
         $this->passiveEffects   = $args['passiveEffects'];
-        $this->wearableSlots    = $args['wearableSlots'];
+        $this->slot             = $args['slot'];
 
         $this->uses             = $args['maxUses'];
     }
