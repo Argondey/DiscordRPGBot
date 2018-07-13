@@ -50,7 +50,7 @@ class MessageEvent
                                         if(count($content) > 2)
                                         {
                                             $numToDiscard = 1;
-                                            if(count($content) > 3 && is_int($content[3]))
+                                            if(count($content) > 3 && is_numeric($content[3]))
                                                 {$numToDiscard = $content[3];}
 
                                             $numDiscarded = $user->inventory->DiscardItem($content[2], $numToDiscard);

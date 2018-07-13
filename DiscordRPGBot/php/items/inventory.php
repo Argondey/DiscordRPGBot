@@ -27,7 +27,7 @@ class Inventory
 
             if($this->bag[$itemName]->quantity <= $quantity)
                 {unset($this->bag[$itemName]);}
-            else{$this->bag[$itemName]->quantity--;}
+            else{$this->bag[$itemName]->quantity -= $quantity;}
 
             return $numDiscarded;
         }
