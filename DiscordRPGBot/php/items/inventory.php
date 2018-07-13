@@ -44,9 +44,9 @@ class Inventory
         if(count($this->bag) > 0)
         {
             $itemNames = array_column($this->bag, 'name');
-            return new Response('override', $user->name . ' has: ' . implode(', ', $itemNames));
+            return new Response('override', $this->user->name . ' has: ' . implode(', ', $itemNames));
         }
-        else{return new Response('override', $user->name . ' has no items');}
+        else{return new Response('override', $this->user->name . ' has no items');}
     }
 }
 ?>
