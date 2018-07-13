@@ -40,8 +40,12 @@ class Inventory
 
     public function ListItems()
     {
-        $itemNames = array_column($this->bag, 'name');
-        return new Response('override', implode(', ', $itemNames));
+        if(count($this->bag) > 0)
+        {
+            $itemNames = array_column($this->bag, 'name');
+            return new Response('override', $user->name . ' has: ' . implode(', ', $itemNames));
+        }
+        else{return new Response('override', $user->name . ' has no items');}
     }
 }
 ?>

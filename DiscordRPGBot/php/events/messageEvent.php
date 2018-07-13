@@ -47,10 +47,10 @@ class MessageEvent
                                 switch(strtolower($content[1]))
                                 {
                                     case 'discard':
-                                        if(count($content > 1))
+                                        if(count($content > 2))
                                         {
                                             $numToDiscard = 1;
-                                            if(count($content > 2))
+                                            if(count($content > 3) && is_int($content[3]))
                                                 {$numToDiscard = $content[3];}
 
                                             $numDiscarded = $user->inventory->DiscardItem($content[2], $numToDiscard);
