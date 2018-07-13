@@ -26,7 +26,7 @@ class Inventory
             $numDiscarded = min($quantity, $this->bag[$itemName]->quantity);
 
             if($this->bag[$itemName]->quantity <= $quantity)
-                {$this->bag[$itemName] = null;}
+                {unset($this->bag[$itemName]);}
             else{$this->bag[$itemName]--;}
 
             return $numDiscarded;

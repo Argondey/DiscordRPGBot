@@ -42,6 +42,7 @@ class MessageEvent
                             }
                             break;
                         case 'item':
+                            var_dump($content);
                             if(count($content > 1))
                             {
                                 switch($content[1])
@@ -50,6 +51,7 @@ class MessageEvent
                                         if(count($content > 2))
                                         {
                                             $numToDiscard = 1;
+                                            var_dump($content);
                                             if(count($content > 3) && is_int($content[3]))
                                                 {$numToDiscard = $content[3];}
 
