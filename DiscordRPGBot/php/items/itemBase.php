@@ -49,7 +49,7 @@ abstract class ItemBase
 
     public static function Find(string $name)
     {
-        $names = array_column(self::$allItems);
+        $names = array_column(self::$allItems, 'name');
         $index = array_search($name, $names);
         if($index === false)
             {return false;}
