@@ -31,9 +31,9 @@ class Config
         require(__DIR__.'/../../composer/vendor/autoload.php');
 
         //grab environment variables
-        $this::$discordToken        = getenv('DISCORD_TOKEN');
-        $this::$databaseUsername    = getenv('DATABASE_USERNAME');
-        $this::$databasePassword    = getenv('DATABASE_PASSWORD');
+        $this::$discordToken    = getenv('DISCORD_TOKEN');
+        $this::$dbUsername      = getenv('DATABASE_USERNAME');
+        $this::$dbPassword      = getenv('DATABASE_PASSWORD');
 
         //create reactphp eventloop
         $this::$eventLoop = \React\EventLoop\Factory::create();
