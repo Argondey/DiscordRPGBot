@@ -23,7 +23,12 @@ class EventHandler
         switch($type)
         {
             case 'message':
-                $result = MessageEvent::HandleEvent($data);
+                try{$result = MessageEvent::HandleEvent($data);}
+                catch(Exception $error)
+                {
+                    $result = new Confusion();
+                    var_dump($error);
+                }
                 break;
             default:
                 return null;

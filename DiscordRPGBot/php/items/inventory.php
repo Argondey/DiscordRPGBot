@@ -18,15 +18,17 @@ class Inventory
         else{$this->bag[$item->name] = clone $item;}
     }
 
-    public function DiscardItem(string $itemName, int $quantity)
+    public function DiscardItem(string $itemName, int $quantity = 1)
     {
         if(isset($this->bag[$item->name]))
         {
+            $numDiscarded = min($quantity, $this->bag[$item->name]->quantity);
+
             if($this->bag[$item->name]->quantity <= $quantity)
                 {$this->bag[$item->name] = null;}
             else{$this->bag[$item->name]--;}
 
-            return true;
+            return $numDiscarded;
         }
         else{return false;}
     }

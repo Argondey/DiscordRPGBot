@@ -49,8 +49,15 @@ class MessageEvent
                                     case 'discard':
                                         if(count($content > 1))
                                         {
-                                            if($user->inventory->DiscardItem($content[2]))
-                                                {return new Response('override', $user->name . ' has discarded ' . $content[2] . '.');}
+                                            $numToDiscard = 1;
+                                            if(count($content > 2))
+                                                {$numToDiscard = $content[3];}
+
+                                            $numDiscarded = $user->inventory->DiscardItem($content[2], $numToDiscard);
+                                            if($numDiscarded !== false)
+                                            {
+                                                return new Response('override', $user->name . ' has discarded ' . $content[2] . 'X' . $numDiscarded . '.');
+                                            }
                                             else{return new Response('override', $user->name . ' did not have a(n) ' . $content[2] . ' to discard.');}
                                         }
                                         else
