@@ -51,7 +51,7 @@ class MessageEvent
                                         if(count($content > 2))
                                         {
                                             $numToDiscard = 1;
-                                            var_dump($content);
+                                            var_dump(count($content > 3));
                                             if(count($content > 3) && is_int($content[3]))
                                                 {$numToDiscard = $content[3];}
 
