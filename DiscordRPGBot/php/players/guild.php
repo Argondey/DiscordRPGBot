@@ -36,7 +36,7 @@ class Guild
     public function GetUser(\CharlotteDunois\Yasmin\Models\User $user)
     {
         if(!isset($this->users[$user->id]))
-            {$this->users[$user->id] = new User($user);}
+            {$this->users[$user->id] = new User($user, $this);}
 
         return $this->users[$user->id];
     }

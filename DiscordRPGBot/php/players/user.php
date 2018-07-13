@@ -12,7 +12,7 @@ class User
 
     public $lastLoot    = 0;
 
-    public function __construct(\CharlotteDunois\Yasmin\Models\User $user)
+    public function __construct(\CharlotteDunois\Yasmin\Models\User $user, Guild $guild)
     {
         $this->user         = $user;
         $this->name         = $user->username;
