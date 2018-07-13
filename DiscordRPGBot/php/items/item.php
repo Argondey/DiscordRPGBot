@@ -31,7 +31,7 @@ class Item extends ItemBase
 
     public function Describe()
     {
-        return new Response('override', 'A(n) ' . $this->name . ' of ' . $this->quality . ' quality. ' . $this->description);
+        return new Response('override', 'A(n) ' . $this->name . ' of ' . Item::$qualities[$this->quality] . ' quality. ' . $this->description);
     }
 
     public function Info()
@@ -39,9 +39,11 @@ class Item extends ItemBase
         $info = 
             ['Name: '       . $this->name
             ,'Type: '       . $this->type
-            ,'Quality: '    . $this->quality
-            ,'Uses: '       . $this->uses . '/' . $this->maxUses
+            ,'Quality: '    . Item::$qualities[$this->quality]
             ,'Slot: '       . $this->slot];
+
+        if($this->uses !== -1)
+        {array_push($info, 'Uses: ' . $this->uses . '/' . $this->maxUses);}
 
         if(isset($this->activeEffects) && count($this->activeEffects) > 0)
             {array_push($info, 'Active Effects: ' . implode(', ', $this->activeEffects));}
