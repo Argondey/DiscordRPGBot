@@ -60,7 +60,7 @@ abstract class ItemBase
     {
         $items = Database::Query('SELECT * FROM RPGBot.items;');
         for($i = 0; $i < count($items); $i++)
-            {self::$allItems[$item['name']] = new Item($items[$i]);}
+            {self::$allItems[$items[$i]['name']] = new Item($items[$i]);}
 
         Logger::Log(count($items) . ' items successfully loaded.');
     }
