@@ -46,7 +46,7 @@ class MessageEvent
                             {
                                 switch(strtolower($content[1]))
                                 {
-                                    case 'Discard':
+                                    case 'discard':
                                         if(count($content > 1))
                                         {
                                             if($user->inventory->DiscardItem($content[2]))
@@ -58,7 +58,7 @@ class MessageEvent
                                             return new Response('override', $user->name . '- You did not specify which item to discard.');
                                         }
                                         break;
-                                    case 'Info':
+                                    case 'info':
                                         if(count($content > 1))
                                         {
                                             $item = Item::Find();
