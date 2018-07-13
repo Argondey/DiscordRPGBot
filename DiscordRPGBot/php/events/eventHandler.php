@@ -10,7 +10,7 @@ class EventHandler
         $yasmin->on('message', function(\CharlotteDunois\Yasmin\Models\Message $message) 
         {$this->Event('message', $message);});
 
-        $yasmin->on('error', function(Exception $error) 
+        $yasmin->on('error', function($error) 
         {var_dump($error);});
 
         $this->Listen();
