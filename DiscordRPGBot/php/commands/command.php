@@ -8,6 +8,8 @@ class Command
     {
         $this->user     = $user;
         $this->command  = $command;
+
+        Logger::Log(get_called_class() . ' was created');
     }
 
     Public function Pop()

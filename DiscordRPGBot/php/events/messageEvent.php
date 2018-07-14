@@ -5,13 +5,10 @@ class MessageEvent
     {
         if(!$message->author->bot)
         {
-            $guild = Guild::GetGuild($message->guild);
-            if($guild != null){Logger::Log('Guild Found.');}
-
-            $user = self::IdentifyUser($message);
+            $guild  = Guild::GetGuild($message->guild);
+            $user   = self::IdentifyUser($message);
             if($user != null)
             {
-                Logger::Log('User found.');
                 if(substr($message->content, 0, 1) == $guild->settings['commandPrefix'])
                 {
                     $content = explode(' ', substr($message->content, 1));
@@ -19,28 +16,24 @@ class MessageEvent
                     switch(strtolower($command))
                     {
                         case 'hello':
-                            Logger::Log('Message event: Greeting');
                             return new Greeting();    
                         case 'guild':
-                            Logger::Log('Guild Command');
                             $guildCommand = new GuildCommand($user, $content);
                             return $guildCommand->HandleCommand();
                         case 'item':
-                            Logger::Log('Item Command');
                             $itemCommand = new ItemCommand($user, $content);
                             return $itemCommand->HandleCommand();
                         case 'loot':
-                            Logger::Log('Loot Command');
-                            $loot = new Loot();
-                            $result = $loot->GetLoot($user);
-                            if(is_a($result, 'Item'))
-                                {return $result->Describe();}
-                            else{return $result;}
-                        case 'myinventory':
-                            return $user->inventory->List();
+                            $lootCommand = new LootCommand($user, $content);
+                            return $lootCommand->HandleCommand();
+                        case 'me':
+                            $meCommand = new MeCommand($user, $content);
+                            return $meCommand->HandleCommand();
                         default:
-                            Logger::Log('Message Event: Confusion');
-                            return new Confusion();
+                            return  new Response('override'
+                                ,$user->name . '- The possible top level commands are: hello, guild, item, loot, me'
+                                    . "\r\n" . 'The proper format is [prefix][command]'
+                                    . "\r\n" . 'Note: Most top level commands must be followed by a sub-command and/or parameters');
                     }
                 }
             }
@@ -51,6 +44,7 @@ class MessageEvent
     {
         if($message->guild == null)
         {
+            Logger::Log('Out of Guild message.');
             $message->channel->send('I\'m sorry I cant talk right now, catch me later when im at your Guild.');
             return null;
         }

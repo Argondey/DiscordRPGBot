@@ -13,6 +13,7 @@ class Response
     //creates a response, type indicates what rules will govern the response
     public function __construct($type = 'random', $data = null, $formatted = false)
     { 
+        Logger::Log(get_called_class() . ' was created');
         $this->formatted = $formatted;
         
         switch($type)

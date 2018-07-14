@@ -7,6 +7,8 @@ require_once 'database.php';
 require_once 'commands/command.php';
 require_once 'commands/itemCommand.php';
 require_once 'commands/guildCommand.php';
+require_once 'commands/lootCommand.php';
+require_once 'commands/meCommand.php';
 
 require_once 'items/itemBase.php';
 require_once 'items/item.php';

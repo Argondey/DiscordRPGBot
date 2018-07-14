@@ -18,7 +18,7 @@ class EventHandler
 
     public function Event($type = null, $data = null)
     {
-        Logger::Log('Event handler was called.');
+        Logger::Log('Event handler called.');
         $result = null;
         switch($type)
         {
@@ -38,7 +38,7 @@ class EventHandler
         if(is_a($result, 'Response'))
         {
             $data->channel->send($result->message);
-            Logger::Log('Attempted to send a response.');
+            Logger::Log('Response Sent.');
         }
     }
 
