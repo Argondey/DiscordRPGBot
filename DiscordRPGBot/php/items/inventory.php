@@ -15,7 +15,7 @@ class Inventory
     {
         if(isset($this->bag[$item->name]))
         {
-            $this->bag[$item->name]->quantity++;
+            $this->bag[$item->name]->quantity += $item->quantity;
             //if the added item and existing item have a different number of uses, add their uses together and adjust the quantity accordingly
             if($this->bag[$item->name]->uses != $item->uses)
             {

@@ -10,7 +10,7 @@ class UserInventory extends Inventory
     //returns the number of items dropped if successful, otherwise returns false
     public function Discard(string $itemName, int $quantity = 1)
     {
-        $item = $this->Retrieve($itemName);
+        $item = $this->Retrieve($itemName, $quantity);
         if($item != null)
         {
             $this->entity->guild->inventory->Add($item);
