@@ -22,8 +22,8 @@ class Item extends ItemBase
         $this->quality          = $args['quality'];
         $this->description      = $args['description'];
         $this->maxUses          = $args['maxUses'];
-        $this->activeEffects    = $args['activeEffects'];
-        $this->passiveEffects   = $args['passiveEffects'];
+        $this->activeEffects    = explode(', ', $args['activeEffects']);
+        $this->passiveEffects   = explode(', ', $args['passiveEffects']);
         $this->slot             = $args['slot'];
 
         $this->uses             = $args['maxUses'];
