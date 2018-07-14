@@ -6,12 +6,12 @@ class MessageEvent
         if(!$message->author->bot)
         {
             $guild = Guild::GetGuild($message->guild);
-            if($guild != null){Logger::Log('A guild was found.');}
+            if($guild != null){Logger::Log('Guild Found.');}
 
             $user = self::IdentifyUser($message);
             if($user != null)
             {
-                Logger::Log('A user was found.');
+                Logger::Log('User found.');
                 if(substr($message->content, 0, 1) == $guild->settings['commandPrefix'])
                 {
                     $content = explode(' ', substr(strtolower($message->content), 1));
@@ -19,36 +19,19 @@ class MessageEvent
                     switch($command)
                     {
                         case'hello':
-                            Logger::Log('Message event resovled as Greeting');
+                            Logger::Log('Message event: Greeting');
                             return new Greeting();
                             break;             
-                        case'changeprefix':
-                            Logger::Log('Message event resovled as ChangePrefix');
-                            $len = strlen($content[00]);
-                            if($len == 1)
-                            {
-                                $guild->settings['commandPrefix'] = $content[0];
-                                $message->channel->send('Prefix changed to ' . $content[0]);
-                                Logger::Log('Prefix changed to ' . $content[0]);
-                            }
-                            else if($len == 0)
-                            {
-                                $message->channel->send('No replacement prefix was sent');
-                                Logger::Log('No replacement prefix was sent');
-                            }
-                            else
-                            {
-                                $message->channel->send('New prefix was more than 1 character! Only 1 character prefixes are allowed');
-                                Logger::Log('New prefix was more than 1 character! Only 1 character prefixes are allowed');
-                            }
-                            break;
                         case 'guild':
+                            Logger::Log('Guild Command');
                             $guildCommand = new GuildCommand($user, $content);
                             return $guildCommand->HandleCommand();
                         case 'item':
+                            Logger::Log('Item Command');
                             $itemCommand = new ItemCommand($user, $content);
                             return $itemCommand->HandleCommand();
                         case 'loot':
+                            Logger::Log('Loot Command');
                             $loot = new Loot();
                             $result = $loot->GetLoot($user);
                             if(is_a($result, 'Item'))
@@ -59,7 +42,7 @@ class MessageEvent
                             return $user->inventory->ListItems();
                             break;
                         default:
-                            Logger::Log('Message event resovled as Confusion');
+                            Logger::Log('Message Event: Confusion');
                             return new Confusion();
                             break;
                     }
