@@ -69,7 +69,7 @@ class Item extends ItemBase
         if(isset($this->passiveEffects) && count($this->passiveEffects) > 0)
             {array_push($info, 'Passive Effects: ' . implode(', ', $this->passiveEffects));}
 
-        return new Response('override', "\r\n" . implode("\r\n", $info), true);
+        return new Response('override', " \r\n" . implode("\r\n", $info), true);
     }
 
     public function Use($target)

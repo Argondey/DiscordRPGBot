@@ -13,11 +13,16 @@ class ItemCommand extends Command
 
         switch($comm)
         {
+            case 'describe':
+                $item = Item::Find($itemName);
+                if($item !== false)
+                    {return $item->Describe();}
+                else{return new Response('override', $this->user->name . '- That item does not exist!');}
             case 'destroy':
                 $numDestroyed = $this->user->inventory->Discard($itemName, ...$this->command);
                 if($numDestroyed !== false)
-                    {return new Response('override', $this->user->name . ' has destroyed '        . $itemName . ' x' . $numDestroyed . '. It seems wasteful...');}
-                else{return new Response('override', $this->user->name . ' did not have a(n) '    . $itemName . ' to destroy');}
+                    {return new Response('override', $this->user->name . ' has destroyed ' . $itemName . ' x' . $numDestroyed . '. It seems wasteful...');}
+                else{return new Response('override', $this->user->name . ' did not have a(n) ' . $itemName . ' to destroy');}
                 break;
             case 'discard':
                 $numDiscarded = $this->user->inventory->Discard($itemName, ...$this->command);
@@ -33,8 +38,8 @@ class ItemCommand extends Command
                 if($target != null)
                 {
                     if($this->user->inventory->Use($itemName, $target))
-                        {return new Response('override', $this->user->name . ' used '    . $itemName . ' on ' . $target->name);}
-                    else{return new Response('override', $this->user->name . ' did not have a(n) '    . $itemName . ' to use on ' . $target->name);}
+                        {return new Response('override', $this->user->name . ' used ' . $itemName . ' on ' . $target->name);}
+                    else{return new Response('override', $this->user->name . ' did not have a(n) ' . $itemName . ' to use on ' . $target->name);}
                 }
                 break;
             case 'grab':
