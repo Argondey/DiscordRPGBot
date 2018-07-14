@@ -37,7 +37,14 @@ class ItemCommand extends Command
                     else{return new Response('override', $this->user->name . ' did not have a(n) '    . $itemName . ' to use on ' . $target->name);}
                 }
                 break;
-            //case 'grab':
+            case 'grab':
+                $item = $user->guild->inventory->Retrieve($itemName, ...$this->command);
+                if($item != null)
+                {
+                    $user->inventory->Add($item);
+                    return new Response('override', $this->user->name . ' found ' . $itemName . ' just sitting on the Guild Floor! Who would just throw that away?');
+                }
+                else{return new Response('override', $this->user->name . ' went scrounging for a(n) ' . $itemName . ' on the Guild Floor, but there were none to be had');}
             default:
                 return new Confusion();
         }

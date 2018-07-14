@@ -40,9 +40,18 @@ class Response
             default:
                 return $this->$name;
             case 'message':
-                if(substr($this->message, -1) === '.' || $this->formatted)
-                    {return $this->message;}
-                else{return $this->message . '.';}
+                $lastChar = substr($this->message, -1);
+                switch($lastChar)
+                {
+                    case ($this->formatted) :
+                    case '.'                :
+                    case '?'                :
+                    case '!'                :
+                    case ';'                :
+                    return $this->message;
+                    default:
+                        return $this->message . '.';
+                }
         }
     }
 

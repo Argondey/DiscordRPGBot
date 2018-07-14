@@ -37,7 +37,7 @@ class MessageEvent
                                 {return $result->Describe();}
                             else{return $result;}
                         case 'myinventory':
-                            return $user->inventory->ListItems();
+                            return $user->inventory->List();
                         default:
                             Logger::Log('Message Event: Confusion');
                             return new Confusion();
