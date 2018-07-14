@@ -76,7 +76,7 @@ class Inventory
     {
         if(isset($this->bag[$itemName]))
         {
-            $numDiscarded = min($quantity, $this->bag[$itemName]->quantity);
+            $numRemoved = min($quantity, $this->bag[$itemName]->quantity);
 
             if($this->bag[$itemName]->quantity <= $quantity)
                 {unset($this->bag[$itemName]);}
@@ -86,7 +86,7 @@ class Inventory
                 $this->bag[$itemName]->uses = $this->bag[$itemName]->maxUses;
             }
             
-            return $numDiscarded;
+            return $numRemoved;
         }
         else{return false;}
     }
