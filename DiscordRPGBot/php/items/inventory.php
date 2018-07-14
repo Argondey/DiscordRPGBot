@@ -57,7 +57,7 @@ class Inventory
             for($i = 0; $i < count($bagKeys); $i++)
             {
                 $item = $this->bag[$bagKeys[$i]];
-                if($type != '' || $item->type == $type)
+                if($type == '' || $item->type == $type)
                     {array_push($items, $item->name . ' x' . $item->quantity);}
             }
             if($type != '' && count($items) == 0)
