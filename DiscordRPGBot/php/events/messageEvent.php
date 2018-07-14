@@ -43,7 +43,8 @@ class MessageEvent
                             }
                             break;
                         case 'item':
-                            return ItemCommand::HandleCommand($user, $content);
+                            $itemCommand = new ItemCommand($user, $content);
+                            return $itemCommand->HandleCommand();
                         case 'loot':
                             $loot = new Loot();
                             $result = $loot->GetLoot($user);

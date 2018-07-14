@@ -1,40 +1,40 @@
 <?php
 class ItemCommand extends Command
 {
-    public function HandleCommand(user $user, array $command)
+    public function HandleCommand()
     {
         $comm = $this->Pop();
         if(!is_a($comm, 'string'))
-            {return new Response('override', $user->name . '- You did not ask me to do anything');}
+            {return new Response('override', $this->user->name . '- You did not ask me to do anything');}
         
         $itemName = $this->Pop();
         if(!is_a($itemName, 'string'))
-            {return new Response('override', $user->name . '- You did not specify an item');}
+            {return new Response('override', $this->user->name . '- You did not specify an item');}
 
         switch($comm)
         {
             case 'destroy':
-                $numDestroyed = $user->inventory->DiscardItem($itemName, ...$command);
+                $numDestroyed = $this->user->inventory->DiscardItem($itemName, ...$this->command);
                 if($numDestroyed !== false)
-                    {return new Response('override', $user->name . ' has destroyed '        . $itemName . ' x' . $numDestroyed . '. It seems wasteful...');}
-                else{return new Response('override', $user->name . ' did not have a(n) '    . $itemName . ' to destroy');}
+                    {return new Response('override', $this->user->name . ' has destroyed '        . $itemName . ' x' . $numDestroyed . '. It seems wasteful...');}
+                else{return new Response('override', $this->user->name . ' did not have a(n) '    . $itemName . ' to destroy');}
                 break;
             case 'discard':
-                $numDiscarded = $user->inventory->DiscardItem($itemName, ...$command);
+                $numDiscarded = $this->user->inventory->DiscardItem($itemName, ...$this->command);
                 if($numDiscarded !== false)
-                    {return new Response('override', $user->name . ' has discarded '        . $itemName . ' x' . $numDiscarded . '.');}
-                else{return new Response('override', $user->name . ' did not have a(n) '    . $itemName . ' to discard');}
+                    {return new Response('override', $this->user->name . ' has discarded '        . $itemName . ' x' . $numDiscarded . '.');}
+                else{return new Response('override', $this->user->name . ' did not have a(n) '    . $itemName . ' to discard');}
                 break;
             case 'info':
                 return Item::Find($itemName)->Info();
                 break;
             case 'Use':
-                $target = $user->guild->FindUser($this->Pop());
+                $target = $this->user->guild->FindUser($this->Pop());
                 if($target != null)
                 {
-                    if($user->inventory->Use($itemName, $target))
-                        {return new Response('override', $user->name . ' used '    . $itemName . ' on ' . $target->name);}
-                    else{return new Response('override', $user->name . ' did not have a(n) '    . $itemName . ' to use on ' . $target->name);}
+                    if($this->user->inventory->Use($itemName, $target))
+                        {return new Response('override', $this->user->name . ' used '    . $itemName . ' on ' . $target->name);}
+                    else{return new Response('override', $this->user->name . ' did not have a(n) '    . $itemName . ' to use on ' . $target->name);}
                 }
                 break;
             default:
