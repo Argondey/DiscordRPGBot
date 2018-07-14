@@ -12,7 +12,7 @@ class MeCommand extends Command
             case 'items':
                 return $this->user->inventory->List();
             case 'name':
-                return $this->user->name;
+                return new Response('override', 'I know you as ' . $this->user->name);
             default:
                 return new Confusion();
         }
