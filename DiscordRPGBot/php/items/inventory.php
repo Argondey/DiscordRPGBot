@@ -1,45 +1,53 @@
 <?php
 class Inventory
 {
-    public $user        = null;
+    public $entity = null;
 
     public $currency    = 0;
-
     public $bag         = [];
 
-    public function __construct(User $user)
+    public function __construct(Entity $entity)
     {
-        $this->user = $user;
     }
 
-    public function AddItem(Item $item)
+    //adds the passed item to this inventory
+    public function Add(Item $item)
     {
         if(isset($this->bag[$item->name]))
-            {$this->bag[$item->name]->quantity++;}
+        {
+            $this->bag[$item->name]->quantity++;
+            //if the added item and existing item have a different number of uses, add their uses together and adjust the quantity accordingly
+            if($this->bag[$item->name]->uses != $item->uses)
+            {
+                $this->bag[$item->name]->quantity += floor(($this->bag[$item->name]->uses + $item->uses) / $item->maxUses);
+                $this->bag[$item->name]->uses = ($this->bag[$item->name]->uses + $item->uses) % $item->maxUses;
+            }
+        }
         else{$this->bag[$item->name] = clone $item;}
     }
 
-    public function DiscardItem(string $itemName, int $quantity = 1)
+    //expend a use of an item to cause the target to recieve the item's active effect
+    //
+    public function Use(string $itemName)
     {
-        if(isset($this->bag[$itemName]))
+        if($this->bag[$itemName])
         {
-            $numDiscarded = min($quantity, $this->bag[$itemName]->quantity);
-
-            if($this->bag[$itemName]->quantity <= $quantity)
-                {unset($this->bag[$itemName]);}
-            else{$this->bag[$itemName]->quantity -= $quantity;}
-
-            return $numDiscarded;
+            $item = $this->bag[$itemName];
+            if($item->maxUses != -1)
+            {
+                $item->uses--;
+                if($item->uses == 0)
+                    {unset($this->bag[$itemName]);}
+            }
+            return true;
         }
         else{return false;}
     }
 
-    public function UseItem(string $itemName, $target)
-    {
-
-    }
-
-    public function ListItems()
+    //returns ' has: ' followed by a comma seperated list of items and their quantities
+    //returns 'has no items' if the inventory does not have any items
+    //optionally may only include items of the selected type
+    public function List(string $type = '')
     {
         if(count($this->bag) > 0)
         {
@@ -49,11 +57,51 @@ class Inventory
             for($i = 0; $i < count($bagKeys); $i++)
             {
                 $item = $this->bag[$bagKeys[$i]];
-                array_push($items, $item->name . ' x' . $item->quantity);
+                if($type != '' || $item->type == $type)
+                    {array_push($items, $item->name . ' x' . $item->quantity);}
             }
-            return new Response('override', $this->user->name . ' has: ' . implode(', ', $items));
+            if($type != '' && count($items) == 0)
+                {return new Response('override', $entity->name . ' has no items of the type "' . $type . '"');}
+
+            $list = new Response('override', $entity->name . ' has: ' . implode(', ', $items));
+            if($type != '')
+                {$list->Append(' which are of the type "' . $type . '"');}
+
+            return $list;
         }
-        else{return new Response('override', $this->user->name . ' has no items');}
+        else{return new Response('override', $entity->name . ' has no items');}
+    }
+
+    public function Remove(string $itemName, int $quantity = 1)
+    {
+        if(isset($this->bag[$itemName]))
+        {
+            $numDiscarded = min($quantity, $this->bag[$itemName]->quantity);
+
+            if($this->bag[$itemName]->quantity <= $quantity)
+                {unset($this->bag[$itemName]);}
+            else
+            {
+                $this->bag[$itemName]->quantity -= $quantity;
+                $this->bag[$itemName]->uses = $this->bag[$itemName]->maxUses;
+            }
+            
+            return $numDiscarded;
+        }
+        else{return false;}
+    }
+
+    //Gets an item from this inventory, returns the item for use elsewhere
+    public function Retrieve(string $itemName, int $quantity = 1)
+    {
+        if(isset($this->bag[$itemName]))
+        {
+            $item           = clone $this->bag[$itemName];
+            $numRemoved     = $this->Remove($itemName, $quantity);
+            $item->quantity = $numRemoved;
+            return $item;
+        }
+        else{return null;}
     }
 }
 ?>

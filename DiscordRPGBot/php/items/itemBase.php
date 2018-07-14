@@ -3,7 +3,7 @@ abstract class ItemBase
 {
     public static $allItems = [];
 
-    public static $qualities = 
+    public const QUALITIES = 
         [0  => 'laughable'
         ,1  => 'pathetic'
         ,2  => 'miserable'
@@ -21,7 +21,7 @@ abstract class ItemBase
         ,14 => 'lost'
         ,15 => 'forbidden'];
 
-    public static $types = 
+    public const TYPES = 
         [0 => 'weapon'
         ,1 => 'armor'
         ,2 => 'magic'
@@ -31,7 +31,7 @@ abstract class ItemBase
         ,6 => 'crafting'
         ,7 => 'money'];
     
-    public static $slots = 
+    public const SLOTS = 
         [0  => 'bag'
         ,1  => 'mainHand'
         ,2  => 'offHand'

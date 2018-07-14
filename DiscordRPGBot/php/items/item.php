@@ -9,6 +9,7 @@ class Item extends ItemBase
     public $maxUses         = -1;
     public $activeEffects   = [];
     public $passiveEffects  = [];
+    public $value           = 0;
     public $slot            = [];
 
     public $uses            = 0;
@@ -24,14 +25,27 @@ class Item extends ItemBase
         $this->maxUses          = $args['maxUses'];
         $this->activeEffects    = explode(', ', $args['activeEffects']);
         $this->passiveEffects   = explode(', ', $args['passiveEffects']);
+        $this->value            = $args['value'];
         $this->slot             = $args['slot'];
 
         $this->uses             = $args['maxUses'];
     }
 
+    public function __get($var)
+    {
+        switch($var)
+        {
+            default:
+                return $this->$var;
+            //return percentage value remaining if less that max uses are available
+            case 'value':
+                return $this->value * ($this->uses / $this->maxUses);
+        }
+    }
+
     public function Describe()
     {
-        return new Response('override', 'A(n) ' . $this->name . ' of ' . Item::$qualities[$this->quality] . ' quality. ' . $this->description);
+        return new Response('override', 'A(n) ' . $this->name . ' of ' . Item::QUALITIES[$this->quality] . ' quality. ' . $this->description);
     }
 
     public function Info()
@@ -39,7 +53,7 @@ class Item extends ItemBase
         $info = 
             ['Name: '       . $this->name
             ,'Type: '       . $this->type
-            ,'Quality: '    . Item::$qualities[$this->quality]
+            ,'Quality: '    . Item::QUALITIES[$this->quality]
             ,'Slot: '       . $this->slot];
 
         if($this->uses !== -1)
@@ -55,7 +69,7 @@ class Item extends ItemBase
         if(isset($this->passiveEffects) && count($this->passiveEffects) > 0)
             {array_push($info, 'Passive Effects: ' . implode(', ', $this->passiveEffects));}
 
-        return new Response('override', implode("\r\n", $info));
+        return new Response('override', implode("\r\n", $info), true);
     }
 
     public function Use($target)

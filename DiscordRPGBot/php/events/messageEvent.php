@@ -15,7 +15,8 @@ class MessageEvent
                 if(substr($message->content, 0, 1) == $guild->settings['commandPrefix'])
                 {
                     $content = explode(' ', substr(strtolower($message->content), 1));
-                    switch($content[0])
+                    $command = array_shift($content);
+                    switch($command)
                     {
                         case'hello':
                             Logger::Log('Message event resovled as Greeting');
@@ -23,12 +24,12 @@ class MessageEvent
                             break;             
                         case'changeprefix':
                             Logger::Log('Message event resovled as ChangePrefix');
-                            $len = strlen($content[1]);
+                            $len = strlen($content[00]);
                             if($len == 1)
                             {
-                                $guild->settings['commandPrefix'] = $content[1];
-                                $message->channel->send('Prefix changed to ' . $content[1]);
-                                Logger::Log('Prefix changed to ' . $content[1]);
+                                $guild->settings['commandPrefix'] = $content[0];
+                                $message->channel->send('Prefix changed to ' . $content[0]);
+                                Logger::Log('Prefix changed to ' . $content[0]);
                             }
                             else if($len == 0)
                             {
@@ -37,39 +38,12 @@ class MessageEvent
                             }
                             else
                             {
-                                $message->channel->send('New prefix was more than 1 character! Only 1 character prefixes are allowed.');
-                                Logger::Log('New prefix was more than 1 character! Only 1 character prefixes are allowed.');
+                                $message->channel->send('New prefix was more than 1 character! Only 1 character prefixes are allowed');
+                                Logger::Log('New prefix was more than 1 character! Only 1 character prefixes are allowed');
                             }
                             break;
                         case 'item':
-                            if(count($content) > 1)
-                            {
-                                switch($content[1])
-                                {
-                                    case 'discard':
-                                        if(count($content) > 2)
-                                        {
-                                            $numToDiscard = 1;
-                                            if(count($content) > 3 && is_numeric($content[3]))
-                                                {$numToDiscard = $content[3];}
-
-                                            $numDiscarded = $user->inventory->DiscardItem($content[2], $numToDiscard);
-                                            if($numDiscarded !== false)
-                                                {return new Response('override', $user->name . ' has discarded '        . $content[2] . ' x' . $numDiscarded . '.');}
-                                            else{return new Response('override', $user->name . ' did not have a(n) '    . $content[2] . ' to discard.');}
-                                        }
-                                        else{return new Response('override', $user->name . '- You did not specify which item to discard.');}
-                                        break;
-                                    case 'info':
-                                        if(count($content) > 2)
-                                            {return Item::Find($content[2])->Info();}
-                                        else{return new Response('override', $user->name . '- You did not specify which item to get info on.');}
-                                        break;
-                                    case 'Use':
-                                        break;
-                                }  
-                            }
-                            break;
+                            return ItemCommand::HandleCommand($user, $content);
                         case 'loot':
                             $loot = new Loot();
                             $result = $loot->GetLoot($user);
