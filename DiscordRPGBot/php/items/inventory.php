@@ -2,9 +2,7 @@
 class Inventory
 {
     public $entity = null;
-
-    public $currency    = 0;
-    public $bag         = [];
+    public $bag    = [];
 
     public function __construct(Entity $entity)
     {

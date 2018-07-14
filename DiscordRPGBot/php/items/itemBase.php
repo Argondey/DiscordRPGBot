@@ -29,7 +29,7 @@ abstract class ItemBase
         ,4 => 'food'
         ,5 => 'potion'
         ,6 => 'crafting'
-        ,7 => 'money'];
+        ,7 => 'currency'];
     
     public const SLOTS = 
         [0  => 'bag'

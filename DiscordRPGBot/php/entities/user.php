@@ -9,7 +9,6 @@ class User extends Entity
     public $useDiscriminator    = false;
 
     public $inventory   = null;
-    public $currency    = 0;
     public $lastLoot    = 0;
 
     public function __construct(\CharlotteDunois\Yasmin\Models\User $user, Guild $guild, bool $useDiscriminator = false)
