@@ -14,13 +14,13 @@ class ItemCommand extends Command
         switch($comm)
         {
             case 'destroy':
-                $numDestroyed = $this->user->inventory->DiscardItem($itemName, ...$this->command);
+                $numDestroyed = $this->user->inventory->Discard($itemName, ...$this->command);
                 if($numDestroyed !== false)
                     {return new Response('override', $this->user->name . ' has destroyed '        . $itemName . ' x' . $numDestroyed . '. It seems wasteful...');}
                 else{return new Response('override', $this->user->name . ' did not have a(n) '    . $itemName . ' to destroy');}
                 break;
             case 'discard':
-                $numDiscarded = $this->user->inventory->DiscardItem($itemName, ...$this->command);
+                $numDiscarded = $this->user->inventory->Discard($itemName, ...$this->command);
                 if($numDiscarded !== false)
                     {return new Response('override', $this->user->name . ' has discarded '        . $itemName . ' x' . $numDiscarded . '.');}
                 else{return new Response('override', $this->user->name . ' did not have a(n) '    . $itemName . ' to discard');}

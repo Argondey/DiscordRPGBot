@@ -13,7 +13,7 @@ class UserInventory extends Inventory
         $item = $this->Retrieve($itemName);
         if($item != null)
         {
-            $this->entity->guild->inventory->AddItem($item);
+            $this->entity->guild->inventory->Add($item);
             return $item->quantity;
         }
         else{return false;}

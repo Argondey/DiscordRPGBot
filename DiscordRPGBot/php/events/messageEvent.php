@@ -18,10 +18,9 @@ class MessageEvent
                     $command = array_shift($content);
                     switch($command)
                     {
-                        case'hello':
+                        case 'hello':
                             Logger::Log('Message event: Greeting');
-                            return new Greeting();
-                            break;             
+                            return new Greeting();    
                         case 'guild':
                             Logger::Log('Guild Command');
                             $guildCommand = new GuildCommand($user, $content);
@@ -37,14 +36,11 @@ class MessageEvent
                             if(is_a($result, 'Item'))
                                 {return $result->Describe();}
                             else{return $result;}
-                            break;
                         case 'myinventory':
                             return $user->inventory->ListItems();
-                            break;
                         default:
                             Logger::Log('Message Event: Confusion');
                             return new Confusion();
-                            break;
                     }
                 }
             }
