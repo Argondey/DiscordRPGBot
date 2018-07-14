@@ -41,6 +41,7 @@ class ItemCommand extends Command
                         {return new Response('override', $this->user->name . ' used ' . $itemName . ' on ' . $target->name);}
                     else{return new Response('override', $this->user->name . ' did not have a(n) ' . $itemName . ' to use on ' . $target->name);}
                 }
+                else{return new Response('override', $this->user->name . '- You did not say who to use the item on');}
                 break;
             case 'grab':
                 $item = $this->user->guild->inventory->Retrieve($itemName, ...$this->command);
