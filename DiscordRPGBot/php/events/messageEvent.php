@@ -42,6 +42,9 @@ class MessageEvent
                                 Logger::Log('New prefix was more than 1 character! Only 1 character prefixes are allowed');
                             }
                             break;
+                        case 'guild':
+                            $guildCommand = new GuildCommand($user, $content);
+                            return $guildCommand->HandleCommand();
                         case 'item':
                             $itemCommand = new ItemCommand($user, $content);
                             return $itemCommand->HandleCommand();

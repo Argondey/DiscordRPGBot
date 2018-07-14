@@ -37,6 +37,7 @@ class ItemCommand extends Command
                     else{return new Response('override', $this->user->name . ' did not have a(n) '    . $itemName . ' to use on ' . $target->name);}
                 }
                 break;
+            //case 'grab':
             default:
                 return new Confusion();
         }
