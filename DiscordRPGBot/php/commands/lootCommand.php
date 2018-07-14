@@ -11,7 +11,7 @@ class LootCommand extends Command
         {
             case 'get':
                 $loot = new Loot();
-                $result = $loot->GetLoot($user);
+                $result = $loot->GetLoot($this->user);
                 if(is_a($result, 'Item'))
                     {return $result->Describe();}
                 else{return $result;}
