@@ -10,31 +10,32 @@ class GuildCommand extends Command
             return new Response('override', $this->user->name . '- You did not ask me to do anything');
         }
 
-        switch($comm)
+        switch(strtolower($comm))
         {
-            case 'floor':
-                Logger::Log('Guild Command: Floor');
+            case 'search':
+                Logger::Log('Guild Command: Search');
                 return $this->user->guild->inventory->List();
                 break;
-            case'changeprefix':
-                Logger::Log('Guild Command: ChangePrefix');
-                $command    = $this->Pop();
-                $len        = strlen($command);
-                if($len == 1)
+            case 'setting':
+                Logger::Log('Guild Command: Setting');
+                $name   = $this->Pop();
+                $value  = $this->Pop();
+                if($name == null || $value == null)
                 {
-                    $guild->settings['commandPrefix'] = $command;
-                    $message->channel->send('Prefix changed to ' . $command);
-                    Logger::Log('Prefix changed to ' . $command);
-                }
-                else if($len == 0)
-                {
-                    $message->channel->send('No replacement prefix was sent');
-                    Logger::Log('No replacement prefix sent');
+                    return new Response('override'
+                        ,$this->user->name 
+                            . '- $guild setting is used to set the value of a guild-wide setting.'
+                            . "\r\n" . 'The proper format is $guild setting [settingName] [newValue]'
+                            . "\r\n" . ' The setting name options are: ' 
+                            . implode(', ', array_keys($this->user->guild->settings)));
                 }
                 else
                 {
-                    $message->channel->send('New prefix was more than 1 character! Only 1 character prefixes are allowed');
-                    Logger::Log('New prefix Rejected for length');
+                    //todo- actually validate the ne value
+                    $this->user->guild->settings[$name] = $value;
+                    return new Response('override'
+                        ,$this->user->name 
+                            . '- Guild setting ' . $name . ' has been set to ' . $value);
                 }
                 break;
             default:

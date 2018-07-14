@@ -11,7 +11,7 @@ class ItemCommand extends Command
         if(!is_string($itemName))
             {return new Response('override', $this->user->name . '- You did not specify an item');}
 
-        switch($comm)
+        switch(strtolower($comm))
         {
             case 'describe':
                 $item = Item::Find($itemName);

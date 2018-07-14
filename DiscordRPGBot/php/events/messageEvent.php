@@ -14,10 +14,9 @@ class MessageEvent
                 Logger::Log('User found.');
                 if(substr($message->content, 0, 1) == $guild->settings['commandPrefix'])
                 {
-                    //todo- decide whether to remove string to lower as it interferes with username targetting
-                    $content = explode(' ', substr(strtolower($message->content), 1));
+                    $content = explode(' ', substr($message->content, 1));
                     $command = array_shift($content);
-                    switch($command)
+                    switch(strtolower($command))
                     {
                         case 'hello':
                             Logger::Log('Message event: Greeting');
