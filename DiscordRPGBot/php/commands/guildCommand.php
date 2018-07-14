@@ -14,7 +14,7 @@ class GuildCommand extends Command
         {
             case 'floor':
                 Logger::Log('Guild Command: Floor');
-                return $this->user->guild->inventory->ListItems();
+                return $this->user->guild->inventory->List();
                 break;
             case'changeprefix':
                 Logger::Log('Guild Command: ChangePrefix');
