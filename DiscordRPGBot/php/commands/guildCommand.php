@@ -10,9 +10,10 @@ class GuildCommand extends Command
         switch($comm)
         {
             case 'floor':
-                return $user->guild->inventory->ListItems();
+                return $this->user->guild->inventory->ListItems();
                 break;
             default:
                 return new Confusion();
+        }
     }
 }
