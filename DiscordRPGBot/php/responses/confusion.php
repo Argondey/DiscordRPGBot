@@ -1,5 +1,5 @@
 <?php
-class Confusion extends Response
+class Confusion extends RandomResponse
 {
     public static $responseOptions = 
     ['I\'m not sure what to say...'

@@ -1,5 +1,5 @@
 <?php
-abstract class GeneratedResponse
+abstract class GeneratedResponse extends Response
 {
     //creates a random response based on defined criteria
     public function __construct($data = null, bool $formatted = false)

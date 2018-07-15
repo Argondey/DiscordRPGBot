@@ -1,5 +1,5 @@
 <?php
-abstract class RandomResponse
+abstract class RandomResponse extends Response
 {
     //array of string responses to use when randomly generating a response
     public static $responseOptions = [];

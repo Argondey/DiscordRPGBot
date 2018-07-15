@@ -1,5 +1,5 @@
 <?php
-class Greeting extends Response
+class Greeting extends RandomResponse
 {
     public static $responseOptions = 
     ['Hi there, I\'m Dave, its nice to meet you.'

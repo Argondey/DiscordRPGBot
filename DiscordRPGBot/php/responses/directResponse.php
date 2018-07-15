@@ -1,5 +1,5 @@
 <?php
-class DirectResponse
+class DirectResponse extends Response
 {
     //creates a response directly from a passed string
     public function __construct($data = null, bool $formatted = false)
