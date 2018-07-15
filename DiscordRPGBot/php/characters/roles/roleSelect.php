@@ -8,9 +8,10 @@ class RoleSelect
 
     public function GetRole(string $name)
     {
-        $name = ucwords(strtolower($name, self::$roles));
-        if(array_search($name) !== false)
-            {return new $name();}
+        $name = ucwords(strtolower($name));
+        $roleIndex = array_search($name, self::$roles);
+        if($roleIndex !== false)
+            {return new self::$roles[$roleIndex]();}
         else{return null;}
     }
 }
