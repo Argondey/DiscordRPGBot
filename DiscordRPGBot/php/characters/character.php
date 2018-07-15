@@ -57,7 +57,8 @@ class character
     public function Info()
     {
         $info = 
-            ['Stength: '        . $this->strength
+            ['Role: '           . get_class($this->role)
+            ,'Stength: '        . $this->strength
             ,'Intelligence: '   . $this->intelligence
             ,'Dexterity: '      . $this->dexterity
             ,'Charisma: '       . $this->charisma
