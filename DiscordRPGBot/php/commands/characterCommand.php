@@ -18,8 +18,8 @@ class characterCommand extends Command
                         $role = RoleSelect::GetRole($roleName);
                         if($role != null)
                         {
-                            $timeSinceLastChar = time() - $user->lastNewChar;
-                            $charCooldown = $user->guild->settings['createCharCooldown'] * 60;
+                            $timeSinceLastChar = time() - $this->user->lastNewChar;
+                            $charCooldown = $this->user->guild->settings['createCharCooldown'] * 60;
                             if($timeSinceLastChar > $charCooldown)
                             {
                                 $this->user->character = new Character($this->user, $role);
