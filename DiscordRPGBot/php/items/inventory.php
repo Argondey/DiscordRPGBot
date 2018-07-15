@@ -45,7 +45,7 @@ class Inventory
         if(array_key_exists($item->slot, $this->gear))
         {
             $this->UnEquip($item->slot);
-            $this->gear[$slot] = $item;
+            $this->gear[$item->slot] = $item;
             return true;
         }
         else{return false;}
