@@ -19,8 +19,9 @@ class character
 
     public function __construct(User $user, Role $role)
     {
-        $this->user = $user;
-        $this->role = $role;
+        $this->user                 = $user;
+        $this->user->lastNewChar    = time();
+        $this->role                 = $role;
         $this->GenerateStats();
     }
 
@@ -46,7 +47,7 @@ class character
     //For my good friend Hank, who is a good guy.
     public function HankAdjustment()
     {
-        if($this->user->user->username === 'Hank' && $this->user->user->discriminator === '0344')
+        if($this->user->name === 'Hank' && $this->user->discriminator === '0344')
         {
             $this->luck     -= 3;
             $this->charisma += 3;

@@ -18,8 +18,14 @@ class characterCommand extends Command
                         $role = RoleSelect::GetRole($roleName);
                         if($role != null)
                         {
-                            $this->user->character = new Character($this->user, $role);
-                            return $this->user->character->Info();
+                            $timeSinceLastChar = time() - $user->lastNewChar;
+                            $charCooldown = $user->guild->settings['createCharCooldown'] * 60;
+                            if($timeSinceLastChar > $charCooldown)
+                            {
+                                $this->user->character = new Character($this->user, $role);
+                                return $this->user->character->Info();
+                            }
+                            else return new DirectResponse('You cannot create a new character yet. You can create one again in ' . ($charCooldown - $timeSinceLastChar) . ' seconds.');
                         }
                         else{return new DirectResponse($this->user->name . '- The role you specified does not exist.');}
                     }

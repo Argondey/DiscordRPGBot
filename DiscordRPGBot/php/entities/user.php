@@ -11,15 +11,16 @@ class User extends Entity
     public $inventory   = null;
     public $character   = null;
     public $lastLoot    = 0;
+    public $lastNewChar = 0;
 
     public function __construct(\CharlotteDunois\Yasmin\Models\User $user, Guild $guild, bool $useDiscriminator = false)
     {
-        $this->user         = $user;
-        $this->name         = $user->username;
-        $this->discriminator = $user->discriminator;
+        $this->user             = $user;
+        $this->name             = $user->username;
+        $this->discriminator    = $user->discriminator;
         $this->useDiscriminator = $useDiscriminator;
-        $this->guild        = $guild;
-        $this->id           = $user->id;
+        $this->guild            = $guild;
+        $this->id               = $user->id;
 
         $this->inventory    = new UserInventory($this);
     }

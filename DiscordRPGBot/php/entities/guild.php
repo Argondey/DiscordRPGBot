@@ -11,9 +11,11 @@ class Guild extends Entity
     public $users           = [];
     public $settings        = 
         //prefix to be used on every bot command
-        ['commandPrefix'    => '$'
+        ['commandPrefix'        => '$'
         //minutes between loot calls
-        ,'lootCooldown'     => 1];
+        ,'lootCooldown'         => 1
+        //minutes between creating new characters
+        ,'createCharCooldown'   => 60];
 
     public function __construct(\CharlotteDunois\Yasmin\Models\Guild $guild)
     {
