@@ -35,7 +35,7 @@ class character
         $this->intelligence = random_int(0, 6) + $this->role->$intelligenceAdjustment;
         $this->dexterity    = random_int(0, 6) + $this->role->$dexterityAdjustment;
         $this->charisma     = random_int(0, 6) + $this->role->$charismaAdjustment;
-        $this->luck         = random_int(0, 6) + $this->role->$luckAdjustmen;
+        $this->luck         = random_int(0, 6) + $this->role->$luckAdjustment;
         $this->relationship = random_int(0, 6) + $this->role->$relationshipAdjustment;
         $this->HankAdjustment();
 
