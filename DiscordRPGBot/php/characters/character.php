@@ -32,11 +32,11 @@ class character
     public function GenerateStats()
     {
         $this->strength     = random_int(0, 6) + $this->role->strengthAdjustment;
-        $this->intelligence = random_int(0, 6) + $this->role->$intelligenceAdjustment;
-        $this->dexterity    = random_int(0, 6) + $this->role->$dexterityAdjustment;
-        $this->charisma     = random_int(0, 6) + $this->role->$charismaAdjustment;
-        $this->luck         = random_int(0, 6) + $this->role->$luckAdjustment;
-        $this->relationship = random_int(0, 6) + $this->role->$relationshipAdjustment;
+        $this->intelligence = random_int(0, 6) + $this->role->intelligenceAdjustment;
+        $this->dexterity    = random_int(0, 6) + $this->role->dexterityAdjustment;
+        $this->charisma     = random_int(0, 6) + $this->role->charismaAdjustment;
+        $this->luck         = random_int(0, 6) + $this->role->luckAdjustment;
+        $this->relationship = random_int(0, 6) + $this->role->relationshipAdjustment;
         $this->HankAdjustment();
 
         $this->maxHealth        = ($this->strength * 2) + $this->luck;
