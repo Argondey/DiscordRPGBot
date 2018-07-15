@@ -59,15 +59,15 @@ class Inventory
                     {array_push($items, $item->name . ' x' . $item->quantity);}
             }
             if($type != '' && count($items) == 0)
-                {return new Response('override', $this->entity->name . ' has no items of the type "' . $type . '"');}
+                {return new DirectResponse($this->entity->name . ' has no items of the type "' . $type . '"');}
 
-            $list = new Response('override', $this->entity->name . ' has: ' . implode(', ', $items));
+            $list = new DirectResponse($this->entity->name . ' has: ' . implode(', ', $items));
             if($type != '')
                 {$list->Append(' which are of the type "' . $type . '"');}
 
             return $list;
         }
-        else{return new Response('override', $this->entity->name . ' has no items');}
+        else{return new DirectResponse($this->entity->name . ' has no items');}
     }
 
     public function Remove(string $itemName, int $quantity = 1)

@@ -5,11 +5,11 @@ class LootCommand extends Command
     {
         $comm = $this->Pop();
         if(!is_string($comm))
-            {return new Response('override', $this->user->name . '- You did not ask me to do anything');}
+            {return new DirectResponse($this->user->name . '- You did not ask me to do anything');}
 
         switch(strtolower($comm))
         {
-            case 'get':
+            case 'item':
                 $loot = new Loot();
                 $result = $loot->GetLoot($this->user);
                 if(is_a($result, 'Item'))

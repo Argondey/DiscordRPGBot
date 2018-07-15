@@ -1,18 +1,71 @@
 <?php
 class character 
 {
+    public $user            = null;
+    public $role            = null;
+
     public $strength        = 1;
     public $intelligence    = 1;
     public $dexterity       = 1;
     public $charisma        = 1;
     public $luck            = 1;
+    public $relationship    = 1;
 
     public $currentHealth   = 1;
     public $maxHealth       = 1;
 
-    public function __construct()
-    {
+    public $level           = 1;
+    public $xp              = 0;
 
+    public function __construct(User $user, Role $role)
+    {
+        $this->user = $user;
+        $this->role = $role;
+        $this->GenerateStats();
+    }
+
+    public function GainXp(int $amount = 0)
+    {
+        $this->xp += $amount;
+    }
+
+    public function GenerateStats()
+    {
+        $this->strength     = random_int(0, 6) + $this->role->statAdjustment['strength'];
+        $this->intelligence = random_int(0, 6) + $this->role->statAdjustment['intelligence'];
+        $this->dexterity    = random_int(0, 6) + $this->role->statAdjustment['dexterity'];
+        $this->charisma     = random_int(0, 6) + $this->role->statAdjustment['charisma'];
+        $this->luck         = random_int(0, 6) + $this->role->statAdjustment['luck'];
+        $this->relationship = random_int(0, 6) + $this->role->statAdjustment['relationship'];
+        $this->HankAdjustment();
+
+        $this->maxHealth        = ($this->strength * 2) + $this->luck;
+        $this->currentHealth    = $this->maxHealth;
+    }
+
+    //For my good friend Hank, who is a good guy.
+    public function HankAdjustment()
+    {
+        if($this->user->user->name === 'Hank' && $this->user->user->discriminator === '0344')
+        {
+            $this->luck     -= 3;
+            $this->charisma += 3;
+        }
+    }
+
+    public function Info()
+    {
+        $info = 
+            ['Stength: '        . $this->strength
+            ,'Intelligence: '   . $this->intelligence
+            ,'Dexterity: '      . $this->dexterity
+            ,'Charisma: '       . $this->charisma
+            ,'Luck: '           . $this->luck
+            ,'Relationship: '   . $this->relationship
+            ,'Health: '         . $this->currentHealth . '/' . $this->maxHealth
+            ,'Level: '          . $this->level
+            ,'XP: '             . $this->xp];
+        return new DirectResponse(implode("\r\n", $info), true);
     }
 }
 ?>

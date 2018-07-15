@@ -8,6 +8,6 @@ class GuildInventory extends Inventory
 
     //adds ' on the ground' to the end of an inventory list
     public function ListItems()
-    {return base::ListItems()->Append(' on the ground');}
+    {return parent::ListItems()->Append(' on the ground');}
 }
 ?>

@@ -45,7 +45,7 @@ class Item extends ItemBase
 
     public function Describe()
     {
-        return new Response('override', 'A(n) ' . $this->name . ' of ' . Item::QUALITIES[$this->quality] . ' quality. ' . $this->description);
+        return new DirectResponse('A(n) ' . $this->name . ' of ' . Item::QUALITIES[$this->quality] . ' quality. ' . $this->description);
     }
 
     public function Info()
@@ -69,7 +69,7 @@ class Item extends ItemBase
         if(isset($this->passiveEffects) && count($this->passiveEffects) > 0)
             {array_push($info, 'Passive Effects: ' . implode(', ', $this->passiveEffects));}
 
-        return new Response('override', implode("\r\n", $info), true);
+        return new DirectResponse(implode("\r\n", $info), true);
     }
 
     public function Use($target)

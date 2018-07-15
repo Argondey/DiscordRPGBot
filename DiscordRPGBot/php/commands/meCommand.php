@@ -5,14 +5,14 @@ class MeCommand extends Command
     {
         $comm = $this->Pop();
         if(!is_string($comm))
-            {return new Response('override', $this->user->name . '- You did not ask me to do anything');}
+            {return new DirectResponse($this->user->name . '- You did not ask me to do anything');}
 
         switch(strtolower($comm))
         {
             case 'items':
                 return $this->user->inventory->List();
             case 'name':
-                return new Response('override', 'I know you as ' . $this->user->name);
+                return new DirectResponse('I know you as ' . $this->user->name);
             default:
                 return new Confusion();
         }

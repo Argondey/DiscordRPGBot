@@ -17,6 +17,9 @@ class MessageEvent
                     {
                         case 'hello':
                             return new Greeting();    
+                        case 'char':
+                            $charCommand = new CharacterCommand($user, $content);
+                            return $charCommand->HandleCommand();
                         case 'guild':
                             $guildCommand = new GuildCommand($user, $content);
                             return $guildCommand->HandleCommand();
@@ -30,10 +33,10 @@ class MessageEvent
                             $meCommand = new MeCommand($user, $content);
                             return $meCommand->HandleCommand();
                         default:
-                            return  new Response('override'
-                                ,$user->name . '- The possible top level commands are: hello, guild, item, loot, me'
-                                    . "\r\n" . 'The proper format is [prefix][command]'
-                                    . "\r\n" . 'Note: Most top level commands must be followed by a sub-command and/or parameters');
+                            return  new DirectResponse($user->name 
+                                . '- The possible top level commands are: hello, guild, item, loot, me'
+                                . "\r\n" . 'The proper format is [prefix][command]'
+                                . "\r\n" . 'Note: Most top level commands must be followed by a sub-command and/or parameters');
                     }
                 }
             }

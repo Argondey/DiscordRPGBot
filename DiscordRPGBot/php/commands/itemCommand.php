@@ -5,11 +5,11 @@ class ItemCommand extends Command
     {
         $comm = $this->Pop();
         if(!is_string($comm))
-            {return new Response('override', $this->user->name . '- You did not ask me to do anything');}
+            {return new DirectResponse( $this->user->name . '- You did not ask me to do anything');}
         
         $itemName = $this->Pop();
         if(!is_string($itemName))
-            {return new Response('override', $this->user->name . '- You did not specify an item');}
+            {return new DirectResponse( $this->user->name . '- You did not specify an item');}
 
         switch(strtolower($comm))
         {
@@ -17,18 +17,18 @@ class ItemCommand extends Command
                 $item = Item::Find($itemName);
                 if($item !== false)
                     {return $item->Describe();}
-                else{return new Response('override', $this->user->name . '- That item does not exist!');}
+                else{return new DirectResponse( $this->user->name . '- That item does not exist!');}
             case 'destroy':
                 $numDestroyed = $this->user->inventory->Discard($itemName, ...$this->command);
                 if($numDestroyed !== false)
-                    {return new Response('override', $this->user->name . ' has destroyed ' . $itemName . ' x' . $numDestroyed . '. It seems wasteful...');}
-                else{return new Response('override', $this->user->name . ' did not have a(n) ' . $itemName . ' to destroy');}
+                    {return new DirectResponse( $this->user->name . ' has destroyed ' . $itemName . ' x' . $numDestroyed . '. It seems wasteful...');}
+                else{return new DirectResponse( $this->user->name . ' did not have a(n) ' . $itemName . ' to destroy');}
                 break;
             case 'discard':
                 $numDiscarded = $this->user->inventory->Discard($itemName, ...$this->command);
                 if($numDiscarded !== false)
-                    {return new Response('override', $this->user->name . ' has discarded '        . $itemName . ' x' . $numDiscarded . '.');}
-                else{return new Response('override', $this->user->name . ' did not have a(n) '    . $itemName . ' to discard');}
+                    {return new DirectResponse( $this->user->name . ' has discarded '        . $itemName . ' x' . $numDiscarded . '.');}
+                else{return new DirectResponse( $this->user->name . ' did not have a(n) '    . $itemName . ' to discard');}
                 break;
             case 'info':
                 return Item::Find($itemName)->Info();
@@ -38,19 +38,19 @@ class ItemCommand extends Command
                 if($target != null)
                 {
                     if($this->user->inventory->Use($itemName, $target))
-                        {return new Response('override', $this->user->name . ' used ' . $itemName . ' on ' . $target->name);}
-                    else{return new Response('override', $this->user->name . ' did not have a(n) ' . $itemName . ' to use on ' . $target->name);}
+                        {return new DirectResponse( $this->user->name . ' used ' . $itemName . ' on ' . $target->name);}
+                    else{return new DirectResponse( $this->user->name . ' did not have a(n) ' . $itemName . ' to use on ' . $target->name);}
                 }
-                else{return new Response('override', $this->user->name . '- You did not say who to use the item on');}
+                else{return new DirectResponse( $this->user->name . '- You did not say who to use the item on');}
                 break;
             case 'grab':
                 $item = $this->user->guild->inventory->Retrieve($itemName, ...$this->command);
                 if($item != null)
                 {
                     $this->user->inventory->Add($item);
-                    return new Response('override', $this->user->name . ' found ' . $itemName . ' just sitting on the Guild Floor! Who would just throw that away?');
+                    return new DirectResponse( $this->user->name . ' found ' . $itemName . ' just sitting on the Guild Floor! Who would just throw that away?');
                 }
-                else{return new Response('override', $this->user->name . ' went scrounging for a(n) ' . $itemName . ' on the Guild Floor, but there were none to be had');}
+                else{return new DirectResponse( $this->user->name . ' went scrounging for a(n) ' . $itemName . ' on the Guild Floor, but there were none to be had');}
             default:
                 return new Confusion();
         }
