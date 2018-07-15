@@ -1,5 +1,5 @@
 <?php
-class Mage extends Role
+class Thief extends Role
 {
     public $strengthAdjustment      = -1;
     public $intelligenceAdjustment  = 0;
