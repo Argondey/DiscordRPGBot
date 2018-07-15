@@ -34,8 +34,8 @@ class ItemCommand extends Command
                     $item = $this->user->inventory->Retrieve($itemName);
                     if($item !== null)
                     {
-                        if($this->user->inventory->Equip($itemName))
-                            {return new DirectResponse($this->user->name . ' has equipped ' . $itemName);}
+                        if($this->user->inventory->Equip($item))
+                            {return new DirectResponse($this->user->name . ' has equipped ' . $itemName . ' to their ' . $item->slot . ' slot');}
                         else
                         {
                             $this->user->inventory->Add($item);
@@ -49,10 +49,10 @@ class ItemCommand extends Command
                 if($this->user->character != null)
                 {
                     if($this->user->inventory->UnEquip($itemName))
-                        {return new DirectResponse($this->user->name . ' has unequipped ' . $itemName);}
+                        {return new DirectResponse($this->user->name . ' has unequipped the item in their ' . $itemName . ' slot');}
                     else
                     {
-                        return new DirectResponse($this->user->name . ' could not unequip ' . $itemName . ' as they did not have one equipped');
+                        return new DirectResponse($this->user->name . ' could not unequip their ' . $itemName . ' slot as they did not anything equipped there');
                     }
                 }
                 else{return new DirectResponse($this->user->name . '- You don\'t have a character to unequip items from!');}
