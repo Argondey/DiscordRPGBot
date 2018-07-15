@@ -30,22 +30,6 @@ abstract class ItemBase
         ,5 => 'potion'
         ,6 => 'crafting'
         ,7 => 'currency'];
-    
-    public const SLOTS = 
-        [0  => 'bag'
-        ,1  => 'mainHand'
-        ,2  => 'offHand'
-        ,3  => 'head'
-        ,4  => 'eyes'
-        ,5  => 'neck'
-        ,6  => 'shoulders'
-        ,7  => 'arms'
-        ,8  => 'hands'
-        ,9  => 'ring'
-        ,10 => 'torso'
-        ,11 => 'belt'
-        ,12 => 'legs'
-        ,13 => 'feet'];
 
     public static function Find(string $name)
     {

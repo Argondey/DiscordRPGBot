@@ -10,7 +10,7 @@ class Item extends ItemBase
     public $activeEffects   = [];
     public $passiveEffects  = [];
     public $value           = 0;
-    public $slot            = [];
+    public $slot            = null;
 
     public $uses            = 0;
     public $quantity        = 1;

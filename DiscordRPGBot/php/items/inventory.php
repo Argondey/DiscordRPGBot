@@ -1,6 +1,21 @@
 <?php
 class Inventory
 {
+    public $gear = 
+        ['mainHand'     => null
+        ,'offHand'      => null
+        ,'head'         => null
+        ,'eyes'         => null
+        ,'neck'         => null
+        ,'shoulders'    => null
+        ,'arms'         => null
+        ,'hands'        => null
+        ,'ring'         => null
+        ,'torso'        => null
+        ,'belt'         => null
+        ,'legs'         => null
+        ,'feet'         => null];
+
     public $entity = null;
     public $bag    = [];
 
@@ -22,6 +37,31 @@ class Inventory
             }
         }
         else{$this->bag[$item->name] = clone $item;}
+    }
+
+    //add an item to the slot it can occupy, removes an item from slot first if one exists, returns false if the item is slotless
+    public function Equip(Item $item)
+    {
+        if(array_key_exists($item->slot, $this->gear))
+        {
+            $this->UnEquip($item->slot);
+            $this->gear[$slot] = $item;
+            return true;
+        }
+        else{return false;}
+    }
+
+    //remove an item from a gear slot, return true if an item was removed, false if there was no item to remove
+    public function UnEquip(string $slot)
+    {
+        if(isset($this->gear[$slot]))
+        {
+            $item = $this->gear[$slot];
+            $this->gear[$slot] = null;
+            $this->Add($item);
+            return true;
+        }
+        else{return false;}
     }
 
     //expend a use of an item to cause the target to recieve the item's active effect
@@ -70,6 +110,7 @@ class Inventory
         else{return new DirectResponse($this->entity->name . ' has no items');}
     }
 
+    //deletes an item from this inventory, returns the number of deleted items
     public function Remove(string $itemName, int $quantity = 1)
     {
         if(isset($this->bag[$itemName]))

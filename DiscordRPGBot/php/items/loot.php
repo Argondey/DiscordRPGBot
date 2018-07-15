@@ -27,6 +27,16 @@ class Loot
         else return new DirectResponse('You cannot recieve loot yet. You can recieve loot again in ' . ($lootCooldown - $timeSinceLastLoot) . ' seconds.');
     }
 
+    public function RandomOfQuality(int $quality)
+    {
+        $qualItems = [];
+        foreach($this->lootTable as $item)
+        {
+            if($item->quality === $quality){array_push($qualItems, $item);}
+        }
+        return $qualItems[array_rand($qualItems, 1)];
+    }
+
     public function RandomLoot()
     {
         return $this->lootTable[array_rand($this->lootTable, 1)];
